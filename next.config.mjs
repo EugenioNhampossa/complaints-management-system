@@ -2,7 +2,13 @@
 const nextConfig = {
   reactStrictMode: true,
   experimental: {
-    optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
+    optimizePackageImports: [
+      "@mantine/core",
+      "@mantine/hooks",
+      "@mantine/notification",
+      "@mantine/charts",
+      "@mantine/dates",
+    ],
   },
 };
 
