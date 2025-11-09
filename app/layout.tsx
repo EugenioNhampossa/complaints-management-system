@@ -3,14 +3,15 @@
 import "mantine-datatable/styles.layer.css";
 import "@mantine/dates/styles.css";
 import "@mantine/charts/styles.css";
+import "@mantine/carousel/styles.css";
 import "@mantine/notifications/styles.css";
 import "@/styles/global.css";
 import "dayjs/locale/pt";
 import { ColorSchemeScript, mantineHtmlProps } from "@mantine/core";
-import { Geist } from "next/font/google";
+import { Roboto } from "next/font/google";
 import { Providers } from "@/providers";
 
-const geist = Geist({
+const geist = Roboto({
   subsets: ["latin"],
   display: "swap",
 });
@@ -30,7 +31,7 @@ export default function RootLayout({
           content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
         />
       </head>
-      <body className={geist.className}>
+      <body >
         <main>
           <Providers>{children}</Providers>
         </main>

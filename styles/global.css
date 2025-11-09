@@ -1,6 +1,12 @@
 @layer mantine-datatable;
 @import "tailwind-preset-mantine";
 
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
 .scrollArea::-webkit-scrollbar-track {
   background-color: transparent;
 }
@@ -244,23 +250,23 @@
   }
 }
 
-[data-mantine-color-scheme="light"] {
+[data-mantine-color-scheme='light']{
   .mantine-SegmentedControl-root {
     .mantine-SegmentedControl-label {
       &:where(:not([data-disabled], [data-active], [data-read-only])) {
         &:hover {
-          color: var(--mantine-color-black);
+            color: var(--mantine-color-black);
         }
       }
     }
   }
 }
-[data-mantine-color-scheme="dark"] {
+[data-mantine-color-scheme='dark']{
   .mantine-SegmentedControl-root {
     .mantine-SegmentedControl-label {
       &:where(:not([data-disabled], [data-active], [data-read-only])) {
         &:hover {
-          color: var(--mantine-color-white);
+            color: var(--mantine-color-white);
         }
       }
     }
@@ -366,21 +372,18 @@
 /* Pagination */
 .mantine-Pagination-root {
   .mantine-Pagination-control {
-    border-color: var(--mantine-color-default-border);
-    background-color: var(--mantine-color-body);
+      border-color: var(--mantine-color-default-border);
+      background-color: var(--mantine-color-body);
 
-    &:hover {
-      &:where(:not(:disabled, [data-disabled])) {
-        background-color: var(--mantine-color-default-hover);
+      &:hover {
+        &:where(:not(:disabled, [data-disabled])) {
+          background-color: var(--mantine-color-default-hover);
+        }
       }
-    }
     &:where([data-active]) {
       background-color: var(--pagination-active-bg);
       border-color: var(--pagination-active-bg);
-      color: var(
-        --pagination-active-color,
-        var(--mantine-primary-color-contrast)
-      );
+      color: var(--pagination-active-color, var(--mantine-primary-color-contrast));
 
       &:hover {
         background-color: rgba(from var(--pagination-active-bg) r g b / 0.9);
@@ -392,10 +395,10 @@
 /* Stepper */
 .mantine-Stepper-root {
   .mantine-Stepper-stepIcon {
-    background-color: var(--mantine-color-body);
-    border-color: var(--mantine-color-default-border);
-    color: var(--mantine-color-text);
-
+      background-color: var(--mantine-color-body);
+      border-color: var(--mantine-color-default-border);
+      color: var(--mantine-color-text);
+  
     &:where([data-progress]) {
       border-color: var(--step-color);
     }
@@ -457,6 +460,7 @@
   }
 }
 
+
 /* Notification */
 .mantine-Notification-root {
   background-color: var(--mantine-color-secondary-filled);
@@ -516,10 +520,7 @@
     background-color: transparent;
 
     &:where([data-hovered]) {
-      background-color: var(
-        --menu-item-hover,
-        var(--mantine-color-default-hover)
-      );
+      background-color: var(--menu-item-hover, var(--mantine-color-default-hover));
     }
   }
 
@@ -732,14 +733,7 @@
 
         font-size: calc(var(--day-size) / 2.28);
 
-        &:hover:where(
-            :not(
-                [data-static],
-                [data-disabled],
-                [data-selected],
-                [data-in-range]
-              )
-          ) {
+        &:hover:where(:not([data-static], [data-disabled], [data-selected], [data-in-range])) {
           background-color: var(--mantine-color-default-hover) !important;
           border-radius: var(--mantine-radius-default);
 
@@ -748,9 +742,7 @@
           }
         }
 
-        &:where([data-selected]):hover:where(
-            :not([data-disabled], [data-static])
-          ) {
+        &:where([data-selected]):hover:where(:not([data-disabled], [data-static])) {
           background-color: var(--mantine-primary-color-filled-hover);
           border-radius: var(--mantine-radius-default);
         }

@@ -8,15 +8,15 @@ export const cssVariableResolver: CSSVariablesResolver = () => ({
       "var(--mantine-primary-color-filled)",
       0.9
     ),
-    "--mantine-primary-color-light": "var(--mantine-color-neutral-light)",
+    "--mantine-primary-color-light": "var(--mantine-color-emerald-light)",
     "--mantine-primary-color-light-hover":
-      "var(--mantine-color-neutral-light-hover)",
+      "var(--mantine-color-emerald-light-hover)",
     "--mantine-primary-color-light-color":
-      "var(--mantine-color-neutral-light-color)",
+      "var(--mantine-color-emerald-light-color)",
   },
   light: {
     // all variables that depend on light color scheme
-    "--mantine-primary-color-contrast": "var(--mantine-color-neutral-0)", // used as primary color contrast
+    "--mantine-primary-color-contrast": "var(--mantine-color-emerald-0)", // used as primary color contrast
     "--mantine-color-text": "var(--mantine-color-secondary-9)", // used as text color
     "--mantine-color-body": "var(--mantine-color-white)", // used as body color
     "--mantine-color-error": "var(--mantine-color-error-10)", // used as error color
@@ -439,7 +439,7 @@ export const cssVariableResolver: CSSVariablesResolver = () => ({
   },
   dark: {
     // all variables that depend on dark color scheme
-    "--mantine-primary-color-contrast": "var(--mantine-color-neutral-8)", // used as primary color contrast
+    "--mantine-primary-color-contrast": "var(--mantine-color-stone-0)", // used as primary color contrast
     "--mantine-color-text": "var(--mantine-color-secondary-0)", // used as text color
     "--mantine-color-body": "var(--mantine-color-secondary-9)", // used as body color
     "--mantine-color-error": "var(--mantine-color-error-10)", // used as error color
