@@ -22,14 +22,12 @@ export function Hero() {
     <div className="container mx-auto px-4 mt-3">
       <SimpleGrid cols={{ md: 2, base: 1 }} spacing={50}>
         <div className="max-xs:text-center">
-          <h5 className="text-4xl md:text-6xl/[76px] font-semibold max-w-xl bg-gradient-to-r from-slate-900 to-primary-300 text-transparent bg-clip-text">
-            Build Skills That Get You Hired
+          <h5 className="text-4xl md:text-6xl/[76px] font-semibold max-w-xl bg-gradient-to-r from-slate-900 to-primary-500 text-transparent bg-clip-text">
+            Faça a Sua Voz Ser Ouvida
           </h5>
 
           <p className="text-sm md:text-base max-w-lg mt-6 max-md:px-2 text-slate-600">
-            Join a world-className, personalized learning journey built to turn
-            you into a high-performing tech professional — and get hired by top
-            product companies.
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore autem laboriosam ex, perspiciatis atque asperiores iure excepturi iste nostrum cumque, aliquam dolore.
           </p>
           <div className="flex items-center gap-4 mt-6 justify-start max-xs:justify-center">
             <Button size="md">Submeta uma reclamação</Button>
