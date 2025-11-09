@@ -26,7 +26,7 @@ export default function ComplaintsPage() {
           <Stack gap={rem("20px")}>
             <Paper className="shadow-none bg-primary flex flex-col items-center justify-center mb-6 text-white py-12">
               <Title className="text-center">
-                Veja Todas Relclamações Submetidas
+                Veja Todas Reclamações Submetidas
               </Title>
               <Text className="text-center text-sm text-slate-50 md:text-base max-w-lg mt-6 max-md:px-2">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
