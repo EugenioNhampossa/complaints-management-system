@@ -1,6 +1,9 @@
+"use client";
+
 import { Button, Group, Image, Paper, rem } from "@mantine/core";
 import Link from "next/link";
 import { MobileMenu } from "./mobileMenu";
+import { usePathname } from "next/navigation";
 
 export const NavLinks = [
   {
@@ -26,6 +29,17 @@ export const NavLinks = [
 ];
 
 export function Header() {
+  const pathname = usePathname();
+
+  function highlight(key: string) {
+    if (pathname.includes(key)) {
+      return "text-primary-600";
+    } else if (pathname === "/" && key === "home") {
+      return "text-primary-600";
+    }
+    return undefined;
+  }
+
   return (
     <Paper mb={rem("20px")} className="container mx-auto px-4 mt-3 shadow-none">
       <nav className="w-full flex items-center justify-between py-4">
@@ -41,11 +55,7 @@ export function Header() {
               href={link.href}
               className="no-underline py-1 px-3 rounded-md hover:text-primary-600 transition-colors"
             >
-              <span
-                className={link.key == "home" ? "text-primary-600" : undefined}
-              >
-                {link.label}
-              </span>
+              <span className={highlight(link.key)}>{link.label}</span>
             </Link>
           ))}
         </Group>
