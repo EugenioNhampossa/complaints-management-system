@@ -1,5 +1,17 @@
+"use client";
+
 import { Hero } from "@/components/layout/hero";
-import { Box, rem, SimpleGrid, Stack, Title, Text, Button } from "@mantine/core";
+import {
+  Box,
+  rem,
+  SimpleGrid,
+  Stack,
+  Title,
+  Text,
+  Button,
+} from "@mantine/core";
+import { ComplaintCard } from "@/components/ui/complaintCard";
+import { range } from "@mantine/hooks";
 
 export default function HomePage() {
   return (
@@ -16,19 +28,12 @@ export default function HomePage() {
           </Text>
         </Box>
         <SimpleGrid cols={{ lg: 4, md: 3, base: 1 }} spacing={20}>
-          <Box className="h-52 rounded-md bg-gray-100" />
-          <Box className="h-52 rounded-md bg-gray-100" />
-          <Box className="h-52 rounded-md bg-gray-100" />
-          <Box className="h-52 rounded-md bg-gray-100" />
-          <Box className="h-52 rounded-md bg-gray-100" />
-          <Box className="h-52 rounded-md bg-gray-100" />
-          <Box className="h-52 rounded-md bg-gray-100" />
-          <Box className="h-52 rounded-md bg-gray-100" />
+          {range(1, 8).map((index) => (
+            <ComplaintCard key={index} />
+          ))}
         </SimpleGrid>
         <div className="flex justify-center mt-8">
-          <Button size="md">
-            Ver mais reclamações
-          </Button>
+          <Button size="md">Ver mais reclamações</Button>
         </div>
       </div>
     </Stack>
