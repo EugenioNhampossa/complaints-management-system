@@ -27,7 +27,7 @@ export const NavLinks = [
 
 export function Header() {
   return (
-    <Paper mb={rem("40px")} className="container mx-auto px-4 mt-3">
+    <Paper mb={rem("40px")} className="container mx-auto px-4 mt-3 shadow-none">
       <nav className="w-full flex items-center justify-between py-4">
         <Image
           src="/logo-full.svg"
