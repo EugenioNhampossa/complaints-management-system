@@ -1,0 +1,4 @@
+.root {
+  border: 1px solid var(--mantine-color-default-border);
+  box-shadow: none;
+}
