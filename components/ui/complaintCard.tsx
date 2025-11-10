@@ -8,10 +8,21 @@ import {
   UnstyledButton,
 } from "@mantine/core";
 import { IconMapPin } from "@tabler/icons-react";
+import Link from "next/link";
 
-export function ComplaintCard() {
+export type ComplaintCardProps = {
+  href?: string;
+  onClick?: () => void;
+};
+
+export function ComplaintCard({ href = "#", onClick }: ComplaintCardProps) {
   return (
-    <UnstyledButton className="rounded-md">
+    <UnstyledButton
+      onClick={onClick}
+      component={Link}
+      href={href}
+      className="rounded-md"
+    >
       <Paper
         p="sm"
         className="shadow-none cusrsor-pointer bg-stone-50 hover:bg-stone-700/8 transition-colors duration-200"
