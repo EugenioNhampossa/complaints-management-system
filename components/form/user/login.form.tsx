@@ -19,7 +19,7 @@ export function LoginForm() {
   const [errorMessage, setErrorMessage] = useState<null | string>(null);
 
   return (
-    <Box c="gray.8">
+    <Box>
       <form>
         <Stack>
           {errorMessage && (

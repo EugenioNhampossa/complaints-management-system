@@ -25,7 +25,7 @@ export default function HomePage() {
           <Title order={2} mb="" className="text-center">
             Reclamações submetidas
           </Title>
-          <Text className="text-center text-sm  text-slate-600">
+          <Text className="text-center text-sm  text-stone-600">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Similique
             reprehenderit corrupti tenetur illo maxime.
           </Text>
@@ -41,7 +41,7 @@ export default function HomePage() {
           </Button>
         </div>
       </section>
-      {/* <section className="bg-gray-50 py-10 ">
+      {/* <section className="bg-stone-50 py-10 ">
         <SimpleGrid
           className="container mx-auto px-4"
           cols={{ md: 2, base: 1 }}
@@ -55,7 +55,7 @@ export default function HomePage() {
             <Title order={2} mb="" className="text-center">
               Reclamações submetidas
             </Title>
-            <Text className="text-center text-sm  text-slate-600">
+            <Text className="text-center text-sm  text-stone-600">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit.
               Similique reprehenderit corrupti tenetur illo maxime.
             </Text>

@@ -19,9 +19,9 @@ const Breadcrumbs = React.forwardRef<HTMLDivElement, BreadcrumbsProps>(
         <CoreBreadcrumbs
           {...props}
           ref={ref}
-          separator={<IconChevronRight className="text-gray-600" size={16} />}
+          separator={<IconChevronRight className="text-stone-600" size={16} />}
           separatorMargin="xs"
-          className="p-xs text-gray-600"
+          className="p-xs text-stone-600"
         >
           {items.map((item, index) => {
             if (item.href) {

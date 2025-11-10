@@ -59,7 +59,7 @@ export default function Dashboard() {
             <Paper className="border-paper p-xs">
               <Group mb="xs" justify="space-between">
                 <Text className="font-semibold text-sm">Submissões hoje</Text>
-                <IconShoppingCart size={18} className="text-gray-500" />
+                <IconShoppingCart size={18} className="text-stone-500" />
               </Group>
               <Text className="font-bold text-2xl">40</Text>
               <Text c="dimmed" className="text-xs">
@@ -69,7 +69,7 @@ export default function Dashboard() {
             <Paper className="border-paper p-xs">
               <Group mb="xs" justify="space-between">
                 <Text className="font-semibold text-sm">Problemas resolvidos</Text>
-                <IconFileDescription size={18} className="text-gray-500" />
+                <IconFileDescription size={18} className="text-stone-500" />
               </Group>
               <NumberFormatter
                 className="font-bold text-2xl"
@@ -87,7 +87,7 @@ export default function Dashboard() {
                 <Text className="font-semibold text-sm">
                   Tempo médio de resolução
                 </Text>
-                <IconClock size={18} className="text-gray-500" />
+                <IconClock size={18} className="text-stone-500" />
               </Group>
               <Text className="font-bold text-2xl">21 min</Text>
               <Text c="dimmed" className="text-xs">
@@ -97,7 +97,7 @@ export default function Dashboard() {
             <Paper className="border-paper p-xs">
               <Group mb="xs" justify="space-between">
                 <Text className="font-semibold text-sm">Avaliação média</Text>
-                <IconStar size={18} className="text-gray-500" />
+                <IconStar size={18} className="text-stone-500" />
               </Group>
               <Text className="font-bold text-2xl">4.3/5.0</Text>
               <Text c="dimmed" className="text-xs">

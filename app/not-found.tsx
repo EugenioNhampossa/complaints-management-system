@@ -7,7 +7,7 @@ import React from "react";
 
 export default function NothingFoundBackground() {
   return (
-    <section className="bg-white dark:bg-gray-900 ">
+    <section className="bg-white dark:bg-stone-900 ">
       <div className="container min-h-screen px-6 py-12 mx-auto lg:flex lg:items-center lg:gap-12">
         <div className="lg:w-1/2">
           <Box className="mb-[40px] xs:mb-[100px]">
@@ -18,10 +18,10 @@ export default function NothingFoundBackground() {
             />
           </Box>
           <p className="text-sm font-medium">Erro 404</p>
-          <h1 className="mt-3 text-2xl font-semibold text-gray-800 dark:text-white md:text-3xl">
+          <h1 className="mt-3 text-2xl font-semibold text-stone-800 dark:text-white md:text-3xl">
             Página não encontrada
           </h1>
-          <p className="mt-4 text-gray-500 dark:text-gray-400">
+          <p className="mt-4 text-stone-500 dark:text-stone-400">
             Desculpe, a página que procura não existe. Aqui estão alguns links
             úteis:
           </p>

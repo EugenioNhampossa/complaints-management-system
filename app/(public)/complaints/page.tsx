@@ -29,7 +29,7 @@ export default function ComplaintsPage() {
             <Title className="text-center">
               Veja Todas Reclamações Submetidas
             </Title>
-            <Text className="text-center text-sm text-slate-50 md:text-base max-w-lg mt-6 max-md:px-2">
+            <Text className="text-center text-sm text-stone-50 md:text-base max-w-lg mt-6 max-md:px-2">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
               expedita animi ducimus consequatur sapiente id dignissimos
               placeat.
@@ -38,7 +38,7 @@ export default function ComplaintsPage() {
               size="md"
               component={Link}
               href="/complaints/add"
-              className="mt-6 bg-white text-primary hover:bg-slate-100"
+              className="mt-6 bg-white text-primary hover:bg-stone-100"
             >
               Submeter reclamação
             </Button>

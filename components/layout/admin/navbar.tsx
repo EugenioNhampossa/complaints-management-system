@@ -27,7 +27,7 @@ import Link from "next/link";
 
 export const NAVLINKS = [
   {
-    link: "/",
+    link: "/admin",
     key: "dashboard",
     label: "Dashboard",
     icon: IconChartPie2,
@@ -81,7 +81,7 @@ const Navbar = React.forwardRef<HTMLDivElement, NavbarProps>(
             <Box className="mt-md xs:h-[45vh] ">
               
               {links}
-              <Text className="text-xs mb-xs px-2 mt-md text-gray-600">
+              <Text className="text-xs mb-xs px-2 mt-md text-stone-600">
                 OUTROS
               </Text>
               <NavLink

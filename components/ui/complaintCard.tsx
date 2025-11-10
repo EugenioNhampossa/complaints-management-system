@@ -14,14 +14,14 @@ export function ComplaintCard() {
     <UnstyledButton className="rounded-md">
       <Paper
         p="sm"
-        className="shadow-none cusrsor-pointer bg-slate-50 hover:bg-primary/8 transition-colors duration-200"
+        className="shadow-none cusrsor-pointer bg-stone-50 hover:bg-stone-700/8 transition-colors duration-200"
       >
         <Stack gap="xs">
           <Group gap="xs">
             <Avatar />
             <div>
               <Text className="text-sm">Eugénio Nhampossa</Text>
-              <Text className="text-xs text-slate-500">11/04/2020</Text>
+              <Text className="text-xs text-stone-500">11/04/2020</Text>
             </div>
           </Group>
           <Text className="font-semibold text-sm">
@@ -35,8 +35,8 @@ export function ComplaintCard() {
           </Text>
           <Group justify="space-between" align="center">
             <Group gap="2px">
-              <IconMapPin size={16} className="text-slate-500" />
-              <Text className="text-xs text-slate-500">Maputo, Moçambique</Text>
+              <IconMapPin size={16} />
+              <Text className="text-xs ">Maputo, Moçambique</Text>
             </Group>
             <Badge size="sm" color="red" variant="light" className="text-xs">
               Pendente

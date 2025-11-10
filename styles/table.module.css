@@ -1,12 +1,12 @@
 .header {
   color: var(--mantine-color-text);
-  background-color: var(--mantine-color-primary-1);
-  border-radius: var(--mantine-radius-xs);
+  background-color: var(--mantine-color-neutral-1);
+  border-radius: var(--mantine-radius-md);
 }
 
 .root{
   border: 1px solid var(--mantine-color-default-border);
-  border-radius: var(--mantine-radius-xs);
+  border-radius: var(--mantine-radius-md);
 }
 
 .pagination {
@@ -35,7 +35,7 @@
 
     & tr {
       &:hover {
-        background-color: var(--mantine-color-gray-0);
+        background-color: var(--mantine-color-stone-0);
       }
     }
 

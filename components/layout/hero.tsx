@@ -1,6 +1,7 @@
 "use client";
 
-import { Button, Grid, Image, SimpleGrid } from "@mantine/core";
+import { Badge, Button, Grid, Image, SimpleGrid } from "@mantine/core";
+import { IconHeart } from "@tabler/icons-react";
 import Link from "next/link";
 
 export function Hero() {
@@ -8,10 +9,11 @@ export function Hero() {
     <div className="container mx-auto px-4 mt-3">
       <SimpleGrid cols={{ md: 2, base: 1 }} spacing={50}>
         <div className="max-xs:text-center">
-          <h5 className="text-4xl md:text-6xl/[76px] font-semibold max-w-xl bg-gradient-to-r from-slate-900 to-primary-500 text-transparent bg-clip-text">
-            Faça a Sua Voz Ser Ouvida
+          <Badge leftSection={<IconHeart size={12}/>} variant="outline">juntos fazemos a diferença</Badge>
+          <h5 className="text-4xl md:text-6xl/[76px] font-semibold max-w-xl bg-gradient-to-r from-gray-700 to-primary-500 text-transparent bg-clip-text">
+            Dê voz às suas preocupações
           </h5>
-          <p className="text-sm md:text-base max-w-lg mt-6 max-md:px-2 text-slate-600">
+          <p className="text-sm md:text-base max-w-lg mt-6 max-md:px-2 text-stone-600">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore
             autem laboriosam ex, perspiciatis atque asperiores iure excepturi
             iste nostrum cumque, aliquam dolore.
@@ -23,22 +25,28 @@ export function Hero() {
           </div>
           <div className="mt-lg flex  flex-1 gap-10 lg:gap-0 flex-row lg:justify-between">
             <div>
-              <div className="font-manrope font-bold text-2xl text-gray-900">
+              <div className="font-manrope font-bold text-2xl text-stone-900">
                 260+
               </div>
-              <span className="text-gray-500  block ">Expert Consultants</span>
+              <span className="text-stone-500  block text-sm">
+                Expert Consultants
+              </span>
             </div>
             <div>
-              <div className="font-manrope font-bold text-2xl text-gray-900">
+              <div className="font-manrope font-bold text-2xl text-stone-900">
                 975+
               </div>
-              <span className="text-gray-500  block ">Active Clients</span>
+              <span className="text-stone-500  block text-sm">
+                Active Clients
+              </span>
             </div>
             <div>
-              <div className="font-manrope font-bold text-2xl text-gray-900">
+              <div className="font-manrope font-bold text-2xl text-stone-900">
                 724+
               </div>
-              <span className="text-gray-500  block ">Projects Delivered</span>
+              <span className="text-stone-500  block text-sm">
+                Projects Delivered
+              </span>
             </div>
           </div>
         </div>

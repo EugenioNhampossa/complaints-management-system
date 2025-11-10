@@ -21,7 +21,7 @@ export default function ComplaintsPage() {
             <SimpleGrid cols={{ sm: 1, md: 2 }}>
               <div className="h-full flex flex-col  justify-center">
                 <Title className="">Formulário de Reclamações</Title>
-                <Text className="text-sm text-slate-50 md:text-base max-w-lg mt-6 max-md:px-2">
+                <Text className="text-sm text-stone-50 md:text-base max-w-lg mt-6 max-md:px-2">
                   Utilize o formulário abaixo para submeter suas reclamações de
                   forma rápida e eficiente. Estamos aqui para ouvir você e
                   melhorar nossos serviços com base no seu feedback.

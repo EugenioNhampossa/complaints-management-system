@@ -22,7 +22,7 @@
   border-radius: var(--mantine-radius-default);
 
   &:hover {
-    background-color: var(--mantine-color-gray-3);
+    background-color: var(--mantine-color-stone-3);
   }
 }
 

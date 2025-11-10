@@ -48,7 +48,7 @@ export function CreateComplaintForm() {
       </SimpleGrid>
       <div>
         <Text>Seleccione a localização</Text>
-        <Text className="text-sm text-slate-600 mb-2">
+        <Text className="text-sm text-stone-600 mb-2">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus,
           architecto! Inventore.
         </Text>

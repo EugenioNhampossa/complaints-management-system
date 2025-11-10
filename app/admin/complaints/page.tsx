@@ -11,7 +11,7 @@ import { DatePickerInput } from "@mantine/dates";
 import { DataTable } from "mantine-datatable";
 import React, { useMemo } from "react";
 
-export default function Notifications() {
+export default function Complaints() {
   const pagination = usePagination();
 
   const queryParams = useMemo(

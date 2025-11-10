@@ -17,7 +17,7 @@ export function Footer() {
               className="h-[40px] w-fit object-contain"
             />
           </Link>
-          <ul className="flex gap-4 flex-wrap items-center mb-6 text-sm font-medium sm:mb-0 dark:text-gray-400">
+          <ul className="flex gap-4 flex-wrap items-center mb-6 text-sm font-medium sm:mb-0 dark:text-stone-400">
             {NavLinks.map((link) => (
               <li key={link.key}>
                 <Link href={link.href} className="hover:underline">
@@ -27,8 +27,8 @@ export function Footer() {
             ))}
           </ul>
         </div>
-        <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-        <span className="block text-sm sm:text-center dark:text-gray-400">
+        <hr className="my-6 border-stone-200 sm:mx-auto dark:border-stone-700 lg:my-8" />
+        <span className="block text-sm sm:text-center dark:text-stone-400">
           © 2023{" "}
           <a href="https://flowbite.com/" className="hover:underline">
             SiGeR
