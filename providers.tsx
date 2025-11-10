@@ -10,7 +10,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "dayjs/locale/pt";
 import { cssVariableResolver } from "./theme/cssVariablesResolver";
 import { theme } from "./theme/theme";
-// import { SessionProvider } from "next-auth/react";
 
 export function Providers({ children }: { children: ReactNode }) {
   const queryClient = new QueryClient({
@@ -23,20 +22,20 @@ export function Providers({ children }: { children: ReactNode }) {
   });
 
   return (
-      <QueryClientProvider client={queryClient}>
-        <NuqsAdapter>
-          <MantineProvider
-            cssVariablesResolver={cssVariableResolver}
-            theme={theme}
-          >
-            <ModalsProvider>
-              <DatesProvider settings={{ locale: "pt" }}>
-                <Notifications position="top-center" />
-                {children}
-              </DatesProvider>
-            </ModalsProvider>
-          </MantineProvider>
-        </NuqsAdapter>
-      </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <NuqsAdapter>
+        <MantineProvider
+          cssVariablesResolver={cssVariableResolver}
+          theme={theme}
+        >
+          <ModalsProvider>
+            <DatesProvider settings={{ locale: "pt" }}>
+              <Notifications position="top-center" />
+              {children}
+            </DatesProvider>
+          </ModalsProvider>
+        </MantineProvider>
+      </NuqsAdapter>
+    </QueryClientProvider>
   );
 }

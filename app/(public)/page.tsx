@@ -14,6 +14,7 @@ import {
 import { ComplaintCard } from "@/components/ui/complaintCard";
 import { range } from "@mantine/hooks";
 import { Footer } from "@/components/layout/footer";
+import Link from "next/link";
 
 export default function HomePage() {
   return (
@@ -35,7 +36,9 @@ export default function HomePage() {
           ))}
         </SimpleGrid>
         <div className="flex justify-center mt-8">
-          <Button size="md">Ver mais reclamações</Button>
+          <Button component={Link} href="/complaints" size="md">
+            Ver mais reclamações
+          </Button>
         </div>
       </section>
       {/* <section className="bg-gray-50 py-10 ">

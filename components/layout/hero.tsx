@@ -1,21 +1,7 @@
 "use client";
 
-import {
-  Button,
-  Container,
-  Grid,
-  Group,
-  Image,
-  List,
-  SimpleGrid,
-  Text,
-  ThemeIcon,
-  Title,
-} from "@mantine/core";
-import classes from "@/styles/hero.module.css";
-import { useRef } from "react";
-import Autoplay from "embla-carousel-autoplay";
-import { Carousel } from "@mantine/carousel";
+import { Button, Grid, Image, SimpleGrid } from "@mantine/core";
+import Link from "next/link";
 
 export function Hero() {
   return (
@@ -25,12 +11,15 @@ export function Hero() {
           <h5 className="text-4xl md:text-6xl/[76px] font-semibold max-w-xl bg-gradient-to-r from-slate-900 to-primary-500 text-transparent bg-clip-text">
             Faça a Sua Voz Ser Ouvida
           </h5>
-
           <p className="text-sm md:text-base max-w-lg mt-6 max-md:px-2 text-slate-600">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore autem laboriosam ex, perspiciatis atque asperiores iure excepturi iste nostrum cumque, aliquam dolore.
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore
+            autem laboriosam ex, perspiciatis atque asperiores iure excepturi
+            iste nostrum cumque, aliquam dolore.
           </p>
           <div className="flex items-center gap-4 mt-6 justify-start max-xs:justify-center">
-            <Button size="md">Submeta uma reclamação</Button>
+            <Button component={Link} href="/complaints/add" size="md">
+              Submeta uma reclamação
+            </Button>
           </div>
           <div className="mt-lg flex  flex-1 gap-10 lg:gap-0 flex-row lg:justify-between">
             <div>

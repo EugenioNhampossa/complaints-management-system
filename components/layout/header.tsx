@@ -43,17 +43,19 @@ export function Header() {
   return (
     <Paper mb={rem("20px")} className="container mx-auto px-4 mt-3 shadow-none">
       <nav className="w-full flex items-center justify-between py-4">
-        <Image
-          src="/logo-full.svg"
-          alt="Logo"
-          className="h-[40px] w-fit object-contain"
-        />
+        <Link href="/">
+          <Image
+            src="/logo-full.svg"
+            alt="Logo"
+            className="h-[40px] w-fit object-contain"
+          />
+        </Link>
         <Group gap={rem("42px")} visibleFrom="sm">
           {NavLinks.map((link) => (
             <Link
               key={link.key}
               href={link.href}
-              className="no-underline py-1 px-3 rounded-md hover:text-primary-600 transition-colors"
+              className="text-sm no-underline py-1 px-3 rounded-md hover:text-primary-600 transition-colors"
             >
               <span className={highlight(link.key)}>{link.label}</span>
             </Link>
@@ -61,7 +63,9 @@ export function Header() {
         </Group>
         <Group visibleFrom="lg">
           <Button variant="outline">Registre-se</Button>
-          <Button>Entrar</Button>
+          <Button component={Link} href="/auth/login">
+            Entrar
+          </Button>
         </Group>
         <MobileMenu />
       </nav>

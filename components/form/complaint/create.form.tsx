@@ -22,12 +22,29 @@ export function CreateComplaintForm() {
       <TextInput
         placeholder="Digite o título da reclamação"
         label="Título da reclamação"
+        variant="filled"
       />
       <SimpleGrid cols={{ base: 1, sm: 2, lg: 4 }}>
-        <Select label="Categoria" placeholder="Seleccione a categoria" />
-        <Select label="Provincia" placeholder="Seleccione a provincia" />
-        <Select label="Distrito" placeholder="Seleccione o distrito" />
-        <TextInput label="Bairro" placeholder="Digite o nome do bairro" />
+        <Select
+          label="Categoria"
+          placeholder="Seleccione a categoria"
+          variant="filled"
+        />
+        <Select
+          label="Provincia"
+          placeholder="Seleccione a provincia"
+          variant="filled"
+        />
+        <Select
+          label="Distrito"
+          placeholder="Seleccione o distrito"
+          variant="filled"
+        />
+        <TextInput
+          label="Bairro"
+          placeholder="Digite o nome do bairro"
+          variant="filled"
+        />
       </SimpleGrid>
       <div>
         <Text>Seleccione a localização</Text>
@@ -43,14 +60,13 @@ export function CreateComplaintForm() {
         rows={4}
         placeholder="Insira uma breve descrição da situação..."
         label="Descrição da reclamação"
+        variant="filled"
       />
       <Group justify="right">
         <Button variant="light" color="red">
           Cancelar
         </Button>
-        <Button type="submit">
-          Submeter Reclamação
-        </Button>
+        <Button type="submit">Submeter Reclamação</Button>
       </Group>
     </Stack>
   );
