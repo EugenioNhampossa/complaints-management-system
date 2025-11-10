@@ -16,10 +16,10 @@ import {
   IconBell,
   IconHelp,
   IconSettings,
-  IconChefHat,
-  IconEdit,
   IconChartPie2,
-  IconFileDescription,
+  IconSpeakerphone,
+  IconUsers,
+  IconCategory,
 } from "@tabler/icons-react";
 import { usePathname } from "next/navigation";
 import { UserMenu } from "./userMenu";
@@ -36,7 +36,19 @@ export const NAVLINKS = [
     link: "/admin/complaints",
     key: "complaints",
     label: "Reclamações",
-    icon: IconFileDescription,
+    icon: IconSpeakerphone,
+  },
+  {
+    link: "/admin/categories",
+    key: "category",
+    label: "Categorias",
+    icon: IconCategory,
+  },
+  {
+    link: "/admin/users",
+    key: "users",
+    label: "Utilizadores",
+    icon: IconUsers,
   },
 ];
 
@@ -79,7 +91,6 @@ const Navbar = React.forwardRef<HTMLDivElement, NavbarProps>(
               </div>
             </Box>
             <Box className="mt-md xs:h-[45vh] ">
-              
               {links}
               <Text className="text-xs mb-xs px-2 mt-md text-stone-600">
                 OUTROS
