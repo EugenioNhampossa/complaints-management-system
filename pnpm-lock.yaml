@@ -20,6 +20,9 @@ importers:
       '@mantine/dates':
         specifier: ^8.3.4
         version: 8.3.4(@mantine/core@8.3.4(@mantine/hooks@8.3.4(react@19.1.1))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@mantine/hooks@8.3.4(react@19.1.1))(dayjs@1.11.18)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@mantine/form':
+        specifier: ^8.3.7
+        version: 8.3.7(react@19.1.1)
       '@mantine/hooks':
         specifier: 8.3.4
         version: 8.3.4(react@19.1.1)
@@ -50,6 +53,9 @@ importers:
       mantine-datatable:
         specifier: ^8.2.0
         version: 8.2.0(@mantine/core@8.3.4(@mantine/hooks@8.3.4(react@19.1.1))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(@mantine/hooks@8.3.4(react@19.1.1))(clsx@2.1.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      mantine-form-zod-resolver:
+        specifier: ^1.3.0
+        version: 1.3.0(@mantine/form@8.3.7(react@19.1.1))(zod@4.1.12)
       mapbox-gl:
         specifier: ^3.16.0
         version: 3.16.0
@@ -74,6 +80,9 @@ importers:
       tailwind-preset-mantine:
         specifier: ^3.0.0
         version: 3.0.0(@mantine/core@8.3.4(@mantine/hooks@8.3.4(react@19.1.1))(@types/react@19.1.13)(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(tailwindcss@4.1.14)
+      zod:
+        specifier: ^4.1.12
+        version: 4.1.12
     devDependencies:
       '@tailwindcss/postcss':
         specifier: ^4.1.14
@@ -539,6 +548,11 @@ packages:
       dayjs: '>=1.0.0'
       react: ^18.x || ^19.x
       react-dom: ^18.x || ^19.x
+
+  '@mantine/form@8.3.7':
+    resolution: {integrity: sha512-LWC1hlVAfgWtrbCNSoGmo+c8IIXAsLSR2KS25QaIfvRVeMeG1I+RheHK/6VmqKEWChpQzjc346gi4LNApbWRZg==}
+    peerDependencies:
+      react: ^18.x || ^19.x
 
   '@mantine/hooks@8.3.4':
     resolution: {integrity: sha512-zsgFa9yzJ4tz0BZmI+yAjI3uNEe6SoQHZlXmvDNXuWrWImpl6Zhoxxr/oVaISB4+KZJd3pRPajklQ+CETrMdhg==}
@@ -1806,6 +1820,10 @@ packages:
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
 
+  klona@2.0.6:
+    resolution: {integrity: sha512-dhG34DXATL5hSxJbIexCft8FChFXtmskoZYnoPWjXQuebWYCNkVeV3KkGegCK9CP1oswI/vQibS2GY7Em/sJJA==}
+    engines: {node: '>= 8'}
+
   language-subtag-registry@0.3.23:
     resolution: {integrity: sha512-0K65Lea881pHotoGEa5gDlMxt3pctLi2RplBb7Ezh4rRdLEOtgi7n4EwK9lamnUCkKBqaeKRVebTq6BAxSkpXQ==}
 
@@ -1907,6 +1925,13 @@ packages:
       clsx: '>=2'
       react: '>=19'
       react-dom: '>=19'
+
+  mantine-form-zod-resolver@1.3.0:
+    resolution: {integrity: sha512-XlXXkJCYuUuOllW0zedYW+m/lbdFQ/bso1Vz+pJOYkxgjhoGvzN2EXWCS2+0iTOT9Q7WnOwWvHmvpTJN3PxSXw==}
+    engines: {node: '>=16.6.0'}
+    peerDependencies:
+      '@mantine/form': '>=7.0.0'
+      zod: '>=3.25.0'
 
   mapbox-gl@3.16.0:
     resolution: {integrity: sha512-rluV1Zp/0oHf1Y9BV+nePRNnKyTdljko3E19CzO5rBqtQaNUYS0ePCMPRtxOuWRwSdKp3f9NWJkOCjemM8nmjw==}
@@ -2656,6 +2681,9 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
+  zod@4.1.12:
+    resolution: {integrity: sha512-JInaHOamG8pt5+Ey8kGmdcAcg3OL9reK8ltczgHTAwNhMys/6ThXHityHxVV2p3fkw/c+MAvBHFVYHFZDmjMCQ==}
+
 snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
@@ -2987,6 +3015,12 @@ snapshots:
       dayjs: 1.11.18
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
+
+  '@mantine/form@8.3.7(react@19.1.1)':
+    dependencies:
+      fast-deep-equal: 3.1.3
+      klona: 2.0.6
+      react: 19.1.1
 
   '@mantine/hooks@8.3.4(react@19.1.1)':
     dependencies:
@@ -4372,6 +4406,8 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
+  klona@2.0.6: {}
+
   language-subtag-registry@0.3.23: {}
 
   language-tags@1.0.9:
@@ -4453,6 +4489,11 @@ snapshots:
       clsx: 2.1.1
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
+
+  mantine-form-zod-resolver@1.3.0(@mantine/form@8.3.7(react@19.1.1))(zod@4.1.12):
+    dependencies:
+      '@mantine/form': 8.3.7(react@19.1.1)
+      zod: 4.1.12
 
   mapbox-gl@3.16.0:
     dependencies:
@@ -5327,3 +5368,5 @@ snapshots:
   yallist@5.0.0: {}
 
   yocto-queue@0.1.0: {}
+
+  zod@4.1.12: {}
