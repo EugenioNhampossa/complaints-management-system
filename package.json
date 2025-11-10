@@ -20,6 +20,7 @@
     "@tabler/icons-react": "^3.35.0",
     "@tanstack/react-query": "^5.90.2",
     "clsx": "^2.1.1",
+    "dayjs": "^1.11.19",
     "embla-carousel": "^8.6.0",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
