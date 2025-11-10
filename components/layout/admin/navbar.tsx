@@ -40,7 +40,7 @@ export const NAVLINKS = [
   },
   {
     link: "/admin/categories",
-    key: "category",
+    key: "categories",
     label: "Categorias",
     icon: IconCategory,
   },
@@ -73,7 +73,7 @@ const Navbar = React.forwardRef<HTMLDivElement, NavbarProps>(
         href={item.link}
         key={item.label}
         label={item.label}
-        leftSection={<item.icon size={17} />}
+        leftSection={<item.icon size={16} stroke={1.5} />}
       />
     ));
 
@@ -102,7 +102,7 @@ const Navbar = React.forwardRef<HTMLDivElement, NavbarProps>(
                 component={Link}
                 data-active={pathname.includes("notifications") || undefined}
                 label="Notificações"
-                leftSection={<IconBell size={17} />}
+                leftSection={<IconBell size={16} stroke={1.5} />}
                 rightSection={
                   <Badge color="red" size="xs" circle>
                     1
@@ -116,7 +116,7 @@ const Navbar = React.forwardRef<HTMLDivElement, NavbarProps>(
                 component={Link}
                 data-active={pathname.includes("help") || undefined}
                 label="Ajuda"
-                leftSection={<IconHelp size={17} />}
+                leftSection={<IconHelp size={16} stroke={1.5} />}
               />
               <NavLink
                 className={classes.link}
@@ -125,7 +125,7 @@ const Navbar = React.forwardRef<HTMLDivElement, NavbarProps>(
                 component={Link}
                 data-active={pathname.includes("settings") || undefined}
                 label="Definições"
-                leftSection={<IconSettings size={17} />}
+                leftSection={<IconSettings size={16} stroke={1.5} />}
               />
             </Box>
           </div>
