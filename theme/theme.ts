@@ -365,7 +365,7 @@ export const theme: MantineThemeOverride = createTheme({
     info: blueColors,
     warning: amberColors,
   },
-  focusRing: "always",
+  focusRing: "never",
   scale: 1,
   primaryColor: "primary",
   primaryShade: { light: 5, dark: 5 },

@@ -58,7 +58,7 @@ export default function ComplaintsPage() {
             </SimpleGrid>
             <SimpleGrid cols={{ lg: 4, md: 3, sm: 2, base: 1 }} spacing={20}>
               {range(1, 8).map((index) => (
-                <ComplaintCard key={index} />
+                <ComplaintCard href={`/complaints/${index}`} key={index} />
               ))}
             </SimpleGrid>
             <Divider my="xs" />

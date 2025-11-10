@@ -32,15 +32,6 @@ const UserMenu = React.forwardRef<HTMLDivElement, UserMenuProps>(
             </Menu.Item>
             <Menu.Divider />
             <Menu.Item
-              component={Link}
-              href="/pre-admin"
-              className="p-1"
-              leftSection={<IconForklift size={14} />}
-            >
-              Mudar restautante
-            </Menu.Item>
-            <Menu.Divider />
-            <Menu.Item
               className="p-1"
               color="red"
               leftSection={<IconLogout size={14} />}

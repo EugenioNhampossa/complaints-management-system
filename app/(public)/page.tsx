@@ -32,7 +32,7 @@ export default function HomePage() {
         </Box>
         <SimpleGrid cols={{ lg: 4, md: 3, sm: 2, base: 1 }} spacing={20}>
           {range(1, 8).map((index) => (
-            <ComplaintCard key={index} />
+            <ComplaintCard href={`/complaints/${index}`} key={index} />
           ))}
         </SimpleGrid>
         <div className="flex justify-center mt-8">
