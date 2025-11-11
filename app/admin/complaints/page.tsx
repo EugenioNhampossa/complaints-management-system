@@ -4,7 +4,7 @@ import { Breadcrumbs } from "@/components/layout/admin/breadcrumbs";
 import { TitleBar } from "@/components/layout/admin/titleBar";
 import { EmptyState } from "@/components/ui/emptyState";
 import { usePagination } from "@/hooks/usePagination";
-import { ComplaintsColumns } from "@/schemas/table/complaints.columns";
+import { ComplaintsColumns } from "@/modules/complaints/complaints.columns";
 import { getTableProps } from "@/utils/getTableProps";
 import { Box, Paper, SimpleGrid, Select, TextInput } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
