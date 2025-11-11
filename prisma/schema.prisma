@@ -1,5 +1,3 @@
-
-
 generator client {
   provider = "prisma-client"
   output   = "generated/prisma"
@@ -10,118 +8,159 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum EstadoPedido {
-  PENDENTE
-  EM_PROCESSAMENTO
-  CONCLUIDO
-  CANCELADO
+enum ComplaintStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
 }
 
-enum Prioridade {
-  BAIXA
-  MEDIA
-  ALTA
+enum ComplaintPriority {
+  LOW
+  MEDIUM
+  HIGH
 }
 
-model Utilizador {
-  id            String    @id @default(uuid())
-  nome          String
-  email         String    @unique
-  passwordHash  String
-  dataRegisto   DateTime  @default(now())
-  tipo          TipoUtilizador
-
-  // Relações
-  cidadao       Cidadao?
-  funcionario   Funcionario?
-  administrador Administrador?
+enum UserType {
+  CITIZEN
+  EMPLOYEE
+  ADMIN
 }
 
-enum TipoUtilizador {
-  CIDADAO
-  FUNCIONARIO
-  ADMINISTRADOR
+enum Gender {
+  MASC
+  FEM
 }
 
-model Cidadao {
-  id       String   @id @default(uuid())
-  NUIT     Int
-  userId   String   @unique
-  user     Utilizador @relation(fields: [userId], references: [id])
-
-  pedidos      Pedido[]
-  avaliacoes   Avaliacao[]
+model User {
+  id        String    @id @default(nanoid())
+  name      String
+  email     String    @unique
+  password  String
+  type      UserType
+  createdAt DateTime  @default(now())
+  deletedAt DateTime?
+  updatedAt DateTime  @updatedAt()
+  citizen   Citizen?
+  employee  Employee?
 }
 
-model Funcionario {
-  id                 String       @id @default(uuid())
-  numeroFuncionario  String       @unique
-  userId             String       @unique
-  user               Utilizador   @relation(fields: [userId], references: [id])
-
-  comentarios        Comentario[]
-  equipas            Equipa[]     @relation("MembrosEquipa")
+model Citizen {
+  id         String      @id @default(nanoid())
+  userId     String      @unique
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt  DateTime    @default(now())
+  deletedAt  DateTime?
+  updatedAt  DateTime    @updatedAt()
+  complaints Complaint[]
+  ratings    Rating[]
 }
 
-model Administrador {
-  id       String   @id @default(uuid())
-  userId   String   @unique
-  user     Utilizador @relation(fields: [userId], references: [id])
+model Employee {
+  id                 String              @id @default(nanoid())
+  userId             String              @unique
+  personalInfoId     String              @unique
+  createdAt          DateTime            @default(now())
+  deletedAt          DateTime?
+  updatedAt          DateTime            @updatedAt()
+  comments           Comment[]
+  complaintEmployees ComplaintEmployee[]
+  user               User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  personalInfo       personalInfo        @relation(fields: [personalInfoId], references: [id], onDelete: Cascade)
 }
 
-model Pedido {
-  id             String        @id @default(uuid())
-  idCidadao      String
-  idCategoria    Int
-  titulo         String
-  descricao      String
-  dataSubmissao  DateTime      @default(now())
-  estado         EstadoPedido
-  prioridade     Prioridade?
-
-  // Relações
-  cidadao        Cidadao       @relation(fields: [idCidadao], references: [id])
-  categoria      Categoria     @relation(fields: [idCategoria], references: [id])
-  avaliacoes     Avaliacao[]
-  comentarios    Comentario[]
+model personalInfo {
+  id        String    @id @default(nanoid())
+  firstName String
+  lastName  String
+  gender    Gender
+  IdNumber  String    @unique
+  birthDate DateTime
+  createdAt DateTime  @default(now())
+  deletedAt DateTime?
+  updatedAt DateTime  @updatedAt()
+  employee  Employee?
 }
 
-model Avaliacao {
-  id             String    @id @default(uuid())
-  pedidoId       String
-  cidadaoId      String
-  classificacao  Float
-  comentario     String?
-
-  pedido         Pedido     @relation(fields: [pedidoId], references: [id])
-  cidadao        Cidadao    @relation(fields: [cidadaoId], references: [id])
+model Complaint {
+  id          String              @id @default(nanoid())
+  citizenId   String
+  categoryId  Int
+  addressId   String              @unique
+  title       String
+  description String
+  status      ComplaintStatus     @default(PENDING)
+  priority    ComplaintPriority?
+  createdAt   DateTime            @default(now())
+  deletedAt   DateTime?
+  updatedAt   DateTime            @updatedAt()
+  address     ComplaintAddress    @relation(fields: [addressId], references: [id], onDelete: Cascade)
+  citizen     Citizen             @relation(fields: [citizenId], references: [id])
+  category    Category            @relation(fields: [categoryId], references: [id])
+  ratings     Rating[]
+  comments    Comment[]
+  team        ComplaintEmployee[]
 }
 
-model Comentario {
-  id              String       @id @default(uuid())
-  funcionarioId   String
-  pedidoId        String
-  visibilidade    Boolean
-  texto           String
-  data            DateTime     @default(now())
+model ComplaintEmployee {
+  id          String    @id @default(nanoid())
+  complaintId String
+  employeeId  String
+  createdAt   DateTime  @default(now())
+  deletedAt   DateTime?
+  updatedAt   DateTime  @updatedAt()
+  complaint   Complaint @relation(fields: [complaintId], references: [id])
+  employee    Employee  @relation(fields: [employeeId], references: [id])
 
-  funcionario     Funcionario  @relation(fields: [funcionarioId], references: [id])
-  pedido          Pedido       @relation(fields: [pedidoId], references: [id])
+  @@unique([complaintId, employeeId])
 }
 
-model Categoria {
-  id          Int       @id @default(autoincrement())
-  titulo      String
-  descricao   String
-  activa      Boolean   @default(true)
-
-  pedidos     Pedido[]
+model ComplaintAddress {
+  id           String     @id @default(nanoid())
+  district     String
+  province     String
+  neighborhood String?
+  latitude     Float
+  longitude    Float
+  createdAt    DateTime   @default(now())
+  deletedAt    DateTime?
+  updatedAt    DateTime   @updatedAt()
+  complaint    Complaint?
 }
 
-model Equipa {
-  id          Int           @id @default(autoincrement())
-  nome        String
-  descricao   String?
-  membros     Funcionario[] @relation("MembrosEquipa")
+model Rating {
+  id          String    @id @default(nanoid())
+  complaintId String
+  citizenId   String
+  rating      Float
+  comment     String?
+  createdAt   DateTime  @default(now())
+  deletedAt   DateTime?
+  updatedAt   DateTime  @updatedAt()
+  complaint   Complaint @relation(fields: [complaintId], references: [id], onDelete: Cascade)
+  citizen     Citizen   @relation(fields: [citizenId], references: [id])
 }
 
+model Comment {
+  id          String    @id @default(nanoid())
+  employeeId  String
+  complaintId String
+  isVisible   Boolean   @default(true)
+  text        String
+  createdAt   DateTime  @default(now())
+  deletedAt   DateTime?
+  updatedAt   DateTime  @updatedAt()
+  employee    Employee  @relation(fields: [employeeId], references: [id])
+  complaint   Complaint @relation(fields: [complaintId], references: [id], onDelete: Cascade)
+}
+
+model Category {
+  id          Int         @id @default(autoincrement())
+  title       String
+  description String
+  isActive    Boolean     @default(true)
+  createdAt   DateTime    @default(now())
+  deletedAt   DateTime?
+  updatedAt   DateTime    @updatedAt()
+  complaints  Complaint[]
+}
