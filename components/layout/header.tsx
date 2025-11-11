@@ -62,7 +62,7 @@ export function Header() {
           ))}
         </Group>
         <Group visibleFrom="lg">
-          <Button variant="outline">Registre-se</Button>
+          <Button variant="outline" component={Link} href="/auth/register">Registre-se</Button>
           <Button component={Link} href="/auth/login">
             Entrar
           </Button>
