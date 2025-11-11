@@ -319,11 +319,11 @@ export default function AboutPage() {
           </Group>
 
           <Group justify="center" mt="xl" gap="md">
-            <Button component={Link} href="/complaints/add" size="lg">
-              Fazer uma Denúncia
-            </Button>
             <Button variant="outline" component={Link} href="/" size="lg">
               Voltar ao Início
+            </Button>
+            <Button component={Link} href="/complaints/add" size="lg">
+              Fazer uma Denúncia
             </Button>
           </Group>
         </Card>
