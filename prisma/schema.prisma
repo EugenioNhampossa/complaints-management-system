@@ -1,0 +1,127 @@
+
+
+generator client {
+  provider = "prisma-client"
+  output   = "generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum EstadoPedido {
+  PENDENTE
+  EM_PROCESSAMENTO
+  CONCLUIDO
+  CANCELADO
+}
+
+enum Prioridade {
+  BAIXA
+  MEDIA
+  ALTA
+}
+
+model Utilizador {
+  id            String    @id @default(uuid())
+  nome          String
+  email         String    @unique
+  passwordHash  String
+  dataRegisto   DateTime  @default(now())
+  tipo          TipoUtilizador
+
+  // Relações
+  cidadao       Cidadao?
+  funcionario   Funcionario?
+  administrador Administrador?
+}
+
+enum TipoUtilizador {
+  CIDADAO
+  FUNCIONARIO
+  ADMINISTRADOR
+}
+
+model Cidadao {
+  id       String   @id @default(uuid())
+  NUIT     Int
+  userId   String   @unique
+  user     Utilizador @relation(fields: [userId], references: [id])
+
+  pedidos      Pedido[]
+  avaliacoes   Avaliacao[]
+}
+
+model Funcionario {
+  id                 String       @id @default(uuid())
+  numeroFuncionario  String       @unique
+  userId             String       @unique
+  user               Utilizador   @relation(fields: [userId], references: [id])
+
+  comentarios        Comentario[]
+  equipas            Equipa[]     @relation("MembrosEquipa")
+}
+
+model Administrador {
+  id       String   @id @default(uuid())
+  userId   String   @unique
+  user     Utilizador @relation(fields: [userId], references: [id])
+}
+
+model Pedido {
+  id             String        @id @default(uuid())
+  idCidadao      String
+  idCategoria    Int
+  titulo         String
+  descricao      String
+  dataSubmissao  DateTime      @default(now())
+  estado         EstadoPedido
+  prioridade     Prioridade?
+
+  // Relações
+  cidadao        Cidadao       @relation(fields: [idCidadao], references: [id])
+  categoria      Categoria     @relation(fields: [idCategoria], references: [id])
+  avaliacoes     Avaliacao[]
+  comentarios    Comentario[]
+}
+
+model Avaliacao {
+  id             String    @id @default(uuid())
+  pedidoId       String
+  cidadaoId      String
+  classificacao  Float
+  comentario     String?
+
+  pedido         Pedido     @relation(fields: [pedidoId], references: [id])
+  cidadao        Cidadao    @relation(fields: [cidadaoId], references: [id])
+}
+
+model Comentario {
+  id              String       @id @default(uuid())
+  funcionarioId   String
+  pedidoId        String
+  visibilidade    Boolean
+  texto           String
+  data            DateTime     @default(now())
+
+  funcionario     Funcionario  @relation(fields: [funcionarioId], references: [id])
+  pedido          Pedido       @relation(fields: [pedidoId], references: [id])
+}
+
+model Categoria {
+  id          Int       @id @default(autoincrement())
+  titulo      String
+  descricao   String
+  activa      Boolean   @default(true)
+
+  pedidos     Pedido[]
+}
+
+model Equipa {
+  id          Int           @id @default(autoincrement())
+  nome        String
+  descricao   String?
+  membros     Funcionario[] @relation("MembrosEquipa")
+}
+
