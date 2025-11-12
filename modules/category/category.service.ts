@@ -1,7 +1,11 @@
 "use server";
 
 import z from "zod";
-import { createCategorySchema, filterCategorySchema } from "./category.schema";
+import {
+  createCategorySchema,
+  filterCategorySchema,
+  updateCategorySchema,
+} from "./category.schema";
 import prisma from "@/lib/prisma";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
@@ -27,8 +31,8 @@ export async function createCategory(
   }
 }
 
-export async function findManyCategorys(
-  filter: z.infer<typeof filterCategorySchema>
+export async function findManyCategories(
+  filter?: z.infer<typeof filterCategorySchema>
 ) {
   try {
     const [result, meta] = await prisma.category
@@ -36,13 +40,13 @@ export async function findManyCategorys(
         where: {
           deletedAt: null,
           title: {
-            contains: filter.title,
+            contains: filter?.title,
             mode: "insensitive",
           },
-          isActive: filter.isActive,
+          isActive: filter?.isActive,
         },
       })
-      .withPages({ limit: filter.limit, page: filter.page });
+      .withPages({ limit: filter?.limit, page: filter?.page });
 
     return { success: true, data: { result, meta } };
   } catch (error) {
@@ -87,18 +91,16 @@ export async function findCategoryById(id: string) {
   }
 }
 
-
 export async function updateCategory(
-  id: string,
-  dto: Partial<z.infer<typeof createCategorySchema>>
+  dto: z.infer<typeof updateCategorySchema>
 ) {
   try {
-    if (!id || typeof id !== "string") {
+    if (!dto.id || typeof dto.id !== "string") {
       return { success: false, error: "ID de categoria inválido" };
     }
 
     const existing = await prisma.category.findUnique({
-      where: { id },
+      where: { id: dto.id },
     });
 
     if (!existing || existing.deletedAt) {
@@ -106,7 +108,7 @@ export async function updateCategory(
     }
 
     const updated = await prisma.category.update({
-      where: { id },
+      where: { id: dto.id },
       data: dto,
     });
 
@@ -132,5 +134,41 @@ export async function updateCategory(
     }
 
     return { success: false, error: "Falha ao atualizar a categoria" };
+  }
+}
+
+export async function deleteCategory(id: string) {
+  try {
+    if (!id || typeof id !== "string") {
+      return { success: false, error: "ID de categoria inválido" };
+    }
+
+    const existing = await prisma.category.findUnique({
+      where: { id },
+    });
+
+    if (!existing || existing.deletedAt) {
+      return { success: false, error: "Categoria não encontrada" };
+    }
+
+    const updated = await prisma.category.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+      },
+    });
+
+    return { success: true, data: updated };
+  } catch (error) {
+    console.error("Error deleting category:", error);
+
+    if (
+      error instanceof PrismaClientKnownRequestError &&
+      error.code === "P2023"
+    ) {
+      return { success: false, error: "Formato de ID inválido" };
+    }
+
+    return { success: false, error: "Falha ao apagar a categoria" };
   }
 }

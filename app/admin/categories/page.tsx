@@ -1,10 +1,10 @@
 "use client";
 
+import { CreateCategoryForm } from "@/components/form/category/create.form";
 import { Breadcrumbs } from "@/components/layout/admin/breadcrumbs";
 import { TitleBar } from "@/components/layout/admin/titleBar";
 import { CategoryCard } from "@/components/ui/categoryCard";
 import { usePagination } from "@/hooks/usePagination";
-
 import {
   Box,
   Paper,
@@ -17,6 +17,7 @@ import {
   Text,
 } from "@mantine/core";
 import { range } from "@mantine/hooks";
+import { openModal } from "@mantine/modals";
 import React, { useMemo } from "react";
 
 export default function Categories() {
@@ -41,7 +42,19 @@ export default function Categories() {
         <TitleBar
           title="Categorias"
           description="Lista de categorias de reclamações."
-          rightSection={<Button size="xs">Adicionar categoria</Button>}
+          rightSection={
+            <Button
+              size="xs"
+              onClick={() =>
+                openModal({
+                  title: <Text className="text-semibold">Registrar categoria</Text>,
+                  children: <CreateCategoryForm />,
+                })
+              }
+            >
+              Adicionar categoria
+            </Button>
+          }
         />
         <Box mt="xl">
           <Paper className="border-paper p-xs">
