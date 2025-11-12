@@ -13,17 +13,16 @@ const userSchema = z.object({
     .string("Senha inválida")
     .min(4, "A senha deve ter no mínimo 6 caracteres"),
   type: z.enum($Enums.UserType, "Tipo de usuário inválido").optional(),
+  confirmPassword: z
+    .string("Confirmação inválida")
+    .min(4, "A confirmação de senha deve ter no mínimo 4 caracteres"),
 });
 
-const createUserSchema = userSchema.omit({ id: true });
+const createUserSchema = userSchema.omit({ id: true, confirmPassword: true });
 
-const createUserSchemaWithPassConfirmation = createUserSchema
-  .extend({
-    confirmPassword: z
-      .string("Confirmação inválida")
-      .min(4, "A confirmação de senha deve ter no mínimo 6 caracteres"),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
+const createUserSchemaWithPassConfirmation = userSchema
+  .omit({ id: true })
+  .refine((data) => data.password !== data.confirmPassword, {
     message: "As senhas não coincidem",
     path: ["confirmPassword"],
   });

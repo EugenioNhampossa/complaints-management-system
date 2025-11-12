@@ -86,20 +86,43 @@ export async function updateUser(
   }
 }
 
-export async function findManyUsers(filter: z.infer<typeof filterUserSchema>) {
+export async function findManyUsers(filter?: z.infer<typeof filterUserSchema>) {
   try {
+    const personalInfoSelecction = {
+      select: {
+        firstName: true,
+        lastName: true,
+        phone: true,
+      },
+    };
     const [result, meta] = await prisma.user
       .paginate({
         where: {
           deletedAt: null,
-          type: filter.type,
+          type: filter?.type,
           email: {
-            contains: filter.email,
+            contains: filter?.email,
             mode: "insensitive",
           },
         },
+        select: {
+          id: true,
+          email: true,
+          type: true,
+          createdAt: true,
+          citizen: {
+            select: {
+              personalInfo: personalInfoSelecction,
+            },
+          },
+          employee: {
+            select: {
+              personalInfo: personalInfoSelecction,
+            },
+          },
+        },
       })
-      .withPages({ limit: filter.limit, page: filter.page });
+      .withPages({ limit: filter?.limit, page: filter?.page });
 
     return { success: true, data: { result, meta } };
   } catch (error) {

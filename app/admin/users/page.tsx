@@ -1,17 +1,26 @@
 "use client";
 
+import { RegisterForm } from "@/components/form/user/register.form";
 import { Breadcrumbs } from "@/components/layout/admin/breadcrumbs";
 import { TitleBar } from "@/components/layout/admin/titleBar";
 import { EmptyState } from "@/components/ui/emptyState";
 import { usePagination } from "@/hooks/usePagination";
-import { ComplaintsColumns } from "@/modules/complaints/complaints.columns";
+import { UsersColumns } from "@/modules/user/user.columns";
+import { useFindManyUsers } from "@/modules/user/user.hooks";
 import { getTableProps } from "@/utils/getTableProps";
-import { Box, Paper, SimpleGrid, Select, TextInput } from "@mantine/core";
-import { DatePickerInput } from "@mantine/dates";
+import {
+  Box,
+  Paper,
+  SimpleGrid,
+  Select,
+  TextInput,
+  Button,
+} from "@mantine/core";
+import { openModal } from "@mantine/modals";
 import { DataTable } from "mantine-datatable";
 import React, { useMemo } from "react";
 
-export default function Complaints() {
+export default function Users() {
   const pagination = usePagination();
 
   const queryParams = useMemo(
@@ -21,30 +30,33 @@ export default function Complaints() {
     [pagination.queryParams]
   );
 
+  const { data: users, isLoading } = useFindManyUsers({ ...queryParams });
+
   return (
     <div className="mb-[20px]">
       <Breadcrumbs
         items={[
           { title: "Página inicial", href: "/" },
-          { title: "Reclamações" },
+          { title: "Utilizadores" },
         ]}
       />
       <div className="px-xs sm:px-lg">
         <TitleBar
-          title="Reclamações"
-          description="Lista de reclamações submetidas."
+          title="Utilizadores"
+          description="Lista de utilizadores registrados."
           rightSection={
-            <DatePickerInput
+            <Button
               size="xs"
-              type="range"
-              popoverProps={{ position: "bottom-end", shadow: "md" }}
-              variant="filled"
-              value={[
-                new Date(new Date().getFullYear(), new Date().getMonth(), 1),
-                new Date(),
-              ]}
-              valueFormat="ddd, DD MMMM, YYYY"
-            />
+              onClick={() =>
+                openModal({
+                  title: "Registrar utilizador",
+                  children: <RegisterForm withUserType />,
+                  size: "lg",
+                })
+              }
+            >
+              Adicionar utilizadores
+            </Button>
           }
         />
         <Box mt="xl">
@@ -52,21 +64,31 @@ export default function Complaints() {
             <SimpleGrid cols={{ base: 1, md: 3 }}>
               <TextInput
                 size="xs"
-                placeholder="Pesquise pelo títilo"
-                label="Título"
+                placeholder="Pesquise pelo nome"
+                label="Nome"
+                variant="filled"
+              />
+              <TextInput
+                size="xs"
+                placeholder="Pesquise pelo email"
+                label="Email"
                 variant="filled"
               />
               <Select
                 size="xs"
-                placeholder="Pesquise pela categoria"
-                label="Categoria"
+                placeholder="Pesquise pela função"
+                label="Função"
                 variant="filled"
-              />
-              <Select
-                size="xs"
-                placeholder="Pesquise pelo estado"
-                label="Estado"
-                variant="filled"
+                data={[
+                  {
+                    value: "CITIZEN",
+                    label: "Cidadão",
+                  },
+                  {
+                    value: "EMPLOYEE",
+                    label: "Funcionário",
+                  },
+                ]}
               />
             </SimpleGrid>
           </Paper>
@@ -74,19 +96,20 @@ export default function Complaints() {
             {...getTableProps()}
             mt="xs"
             height={"65vh"}
-            columns={ComplaintsColumns}
+            columns={UsersColumns}
             withTableBorder
-            records={[]}
+            records={users?.data.result}
+            fetching={isLoading}
             noRecordsIcon={
-              <EmptyState message="Não existem reclamações registradas" />
+              <EmptyState message="Não existem utilizadores registrados" />
             }
             recordsPerPageOptions={[20, 50, 100]}
             recordsPerPageLabel="Por página"
             page={pagination.queryParams.page + 1}
-            totalRecords={0}
+            totalRecords={users?.data.meta?.totalCount}
             recordsPerPage={pagination.queryParams.limit}
-            onRecordsPerPageChange={(size: number) =>
-              pagination.handleRecordsPerPageChange(size)
+            onRecordsPerPageChange={(limit: number) =>
+              pagination.handleRecordsPerPageChange(limit)
             }
             onPageChange={(page: number) => pagination.setPage(page - 1)}
           />

@@ -20,7 +20,8 @@ export async function createCitizen(dto: z.infer<typeof createCitizenSchema>) {
 
   try {
     if (user.data?.id) {
-      const citizen = await prisma.citizen.create({
+      let response;
+      const data = {
         data: {
           user: {
             connect: { id: user.data.id },
@@ -34,9 +35,14 @@ export async function createCitizen(dto: z.infer<typeof createCitizenSchema>) {
             },
           },
         },
-      });
+      };
+      if (dto.type === "CITIZEN") {
+        response = await prisma.citizen.create(data);
+      } else {
+        response = await prisma.employee.create(data);
+      }
 
-      return { success: true, data: citizen };
+      return { success: true, data: response };
     } else {
       return { success: false, error: "Falha ao criar cidadão" };
     }

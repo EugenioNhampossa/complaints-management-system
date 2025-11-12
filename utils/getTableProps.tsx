@@ -7,12 +7,12 @@ export const PAGE_SIZES = [30, 70, 100];
 export function getTableProps() {
   return {
     withRowBorders: false,
-    customLoader: <Loader size="lg" type="bars" />,
+    customLoader: <Loader size="lg" type="dots" />,
     classNames: {
       header: classes.header,
       table: classes.table,
       pagination: classes.pagination,
-      root:classes.root
+      root: classes.root,
     },
     highlightOnHover: true,
     highlightOnHoverColor: "var(--mantine-primary-color-contrast)",
