@@ -18,19 +18,44 @@ import {
 } from "@mantine/core";
 import { openModal } from "@mantine/modals";
 import { DataTable } from "mantine-datatable";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
+import { useQueryState, parseAsString, parseAsStringEnum } from "nuqs";
+import { UserType } from "@/prisma/generated/prisma";
+import { UserTypeString } from "@/utils/getUserTypeText";
 
 export default function Users() {
   const pagination = usePagination();
+  const [name, setName] = useQueryState("name", parseAsString.withDefault(""));
+  const [email, setEmail] = useQueryState(
+    "email",
+    parseAsString.withDefault("")
+  );
+  const [type, setType] = useQueryState(
+    "type",
+    parseAsStringEnum(["CITIZEN", "EMPLOYEE"])
+  );
 
   const queryParams = useMemo(
     () => ({
       ...pagination.queryParams,
     }),
-    [pagination.queryParams]
+    [pagination.queryParams, name, email, type]
   );
 
-  const { data: users, isLoading } = useFindManyUsers({ ...queryParams });
+  const {
+    data: users,
+    isLoading,
+    refetch,
+  } = useFindManyUsers({
+    ...queryParams,
+    firstName: name,
+    type: type ? type : undefined,
+    email,
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [name, email, type]);
 
   return (
     <div className="mb-[20px]">
@@ -67,19 +92,35 @@ export default function Users() {
                 placeholder="Pesquise pelo nome"
                 label="Nome"
                 variant="filled"
+                value={name}
+                onChange={(e) => setName(e.currentTarget.value)}
               />
               <TextInput
                 size="xs"
                 placeholder="Pesquise pelo email"
                 label="Email"
                 variant="filled"
+                value={email}
+                onChange={(e) => setEmail(e.currentTarget.value)}
               />
               <Select
                 size="xs"
                 placeholder="Pesquise pela função"
                 label="Função"
                 variant="filled"
+                value={type}
+                onChange={(value) => {
+                  if (value != "TODOS") {
+                    setType(value as "CITIZEN" | "EMPLOYEE");
+                  } else {
+                    setType(null);
+                  }
+                }}
                 data={[
+                  {
+                    value: "TODOS",
+                    label: "Todos",
+                  },
                   {
                     value: "CITIZEN",
                     label: "Cidadão",

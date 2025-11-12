@@ -99,11 +99,33 @@ export async function findManyUsers(filter?: z.infer<typeof filterUserSchema>) {
       .paginate({
         where: {
           deletedAt: null,
-          type: filter?.type,
+          type: filter?.type?.length ? filter.type : undefined,
           email: {
             contains: filter?.email,
             mode: "insensitive",
           },
+          OR: [
+            {
+              citizen: {
+                personalInfo: {
+                  firstName: {
+                    contains: filter?.firstName,
+                    mode: "insensitive",
+                  },
+                },
+              },
+            },
+            {
+              employee: {
+                personalInfo: {
+                  firstName: {
+                    contains: filter?.firstName,
+                    mode: "insensitive",
+                  },
+                },
+              },
+            },
+          ],
         },
         select: {
           id: true,

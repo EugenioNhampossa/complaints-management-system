@@ -60,7 +60,7 @@ export const UsersColumns: DataTableColumn<UserResponse>[] = [
       }
       return (
         <Group gap="xs" wrap="nowrap">
-          <Avatar size="sm" color="name" />
+          <Avatar size="sm" color="initials" />
           <div className="text-nowrap">{`${record[obj]?.personalInfo?.firstName} ${record[obj]?.personalInfo?.lastName}`}</div>
         </Group>
       );
@@ -82,7 +82,7 @@ export const UsersColumns: DataTableColumn<UserResponse>[] = [
     accessor: "email",
   },
   {
-    title: "Citizen",
+    title: "Telefone",
     accessor: "phone",
     render(record) {
       let obj: "citizen" | "employee" = "citizen";

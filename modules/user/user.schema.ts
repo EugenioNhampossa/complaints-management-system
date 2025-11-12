@@ -3,6 +3,7 @@ import {
   OffsetPaginationRequestSchema,
   OffsetPaginationResponseSchema,
 } from "@/common/schemas/offsetPagination.schema";
+import { filterPersonalInfoSchema } from "@/common/schemas/personalInfo.schema";
 import { $Enums } from "@/prisma/generated/prisma/client";
 import z from "zod";
 
@@ -29,8 +30,10 @@ const createUserSchemaWithPassConfirmation = userSchema
 
 const updateUserSchema = userSchema.omit({ password: true });
 const filterUserSchema = OffsetPaginationRequestSchema.extend(
-  userSchema.omit({ id: true, password: true }).partial().shape
-);
+  userSchema.omit({ id: true, password: true }).shape
+)
+  .extend(filterPersonalInfoSchema.shape)
+  .partial();
 const userResponseSchema = userSchema.extend(baseResponseSchema.shape);
 
 const userPaginationResponseSchema =
