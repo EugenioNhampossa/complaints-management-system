@@ -1,6 +1,7 @@
 "use client";
 
 import { CreateCategoryForm } from "@/components/form/category/create.form";
+import { UpdateCategoryForm } from "@/components/form/category/update.form";
 import { Breadcrumbs } from "@/components/layout/admin/breadcrumbs";
 import { TitleBar } from "@/components/layout/admin/titleBar";
 import { CategoryCard } from "@/components/ui/categoryCard";
@@ -20,6 +21,7 @@ import {
   Text,
   Select,
   Skeleton,
+  Badge,
 } from "@mantine/core";
 import { range } from "@mantine/hooks";
 import { openModal } from "@mantine/modals";
@@ -70,9 +72,20 @@ export default function Categories() {
           <SimpleGrid cols={{ lg: 3, sm: 2, xs: 1 }} mt="xs">
             {categories?.data.result.map((category) => (
               <CategoryCard
+                onClick={() =>
+                  openModal({
+                    title: "Editar categoria",
+                    children: <UpdateCategoryForm category={category} />,
+                  })
+                }
                 key={category.id}
                 label={category.title}
                 description={category.description}
+                rightsection={
+                  <Badge variant="light" size="sm" color={category.isActive ? "green" : "red"}>
+                    {category.isActive ? "Activa" : "Inactiva"}
+                  </Badge>
+                }
               />
             ))}
           </SimpleGrid>

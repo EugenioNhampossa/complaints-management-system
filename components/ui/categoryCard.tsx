@@ -7,6 +7,7 @@ import React from "react";
 export interface CategoryCardProps extends PaperProps {
   label: string;
   description?: string | React.ReactNode;
+  rightsection?: React.ReactNode;
   onClick?: () => void;
 }
 
@@ -23,6 +24,7 @@ const CategoryCard = React.forwardRef<HTMLDivElement, CategoryCardProps>(
             <div className="w-full">
               <Group justify="space-between" className="w-full">
                 <Text className={classes.label}>{props.label}</Text>
+                {props.rightsection}
               </Group>
               {React.isValidElement(props.description) ? (
                 props.description
