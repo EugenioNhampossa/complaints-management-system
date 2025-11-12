@@ -1,6 +1,6 @@
 generator client {
-  provider = "prisma-client"
-  output   = "generated/prisma"
+  provider            = "prisma-client-js"
+  output              = "generated/prisma"
   importFileExtension = "ts"
 }
 
@@ -35,10 +35,9 @@ enum Gender {
 
 model User {
   id        String    @id @default(nanoid())
-  name      String
   email     String    @unique
   password  String
-  type      UserType
+  type      UserType  @default(CITIZEN)
   createdAt DateTime  @default(now())
   deletedAt DateTime?
   updatedAt DateTime  @updatedAt()
@@ -47,14 +46,16 @@ model User {
 }
 
 model Citizen {
-  id         String      @id @default(nanoid())
-  userId     String      @unique
-  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt  DateTime    @default(now())
-  deletedAt  DateTime?
-  updatedAt  DateTime    @updatedAt()
-  complaints Complaint[]
-  ratings    Rating[]
+  id             String       @id @default(nanoid())
+  userId         String       @unique
+  personalInfoId String       @unique
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt      DateTime     @default(now())
+  deletedAt      DateTime?
+  updatedAt      DateTime     @updatedAt()
+  personalInfo   personalInfo @relation(fields: [personalInfoId], references: [id])
+  complaints     Complaint[]
+  ratings        Rating[]
 }
 
 model Employee {
@@ -74,13 +75,13 @@ model personalInfo {
   id        String    @id @default(nanoid())
   firstName String
   lastName  String
-  gender    Gender
-  IdNumber  String    @unique
-  birthDate DateTime
+  phone     String
+  idNumber  String    @unique
   createdAt DateTime  @default(now())
   deletedAt DateTime?
   updatedAt DateTime  @updatedAt()
   employee  Employee?
+  citizen   Citizen?
 }
 
 model Complaint {

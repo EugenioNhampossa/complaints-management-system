@@ -60,7 +60,6 @@ export async function updateUser(
       },
       data: {
         email: dto.email,
-        name: dto.name,
         type: dto.type,
       },
     });
@@ -94,10 +93,6 @@ export async function findManyUsers(filter: z.infer<typeof filterUserSchema>) {
         where: {
           deletedAt: null,
           type: filter.type,
-          name: {
-            contains: filter.name,
-            mode: "insensitive",
-          },
           email: {
             contains: filter.email,
             mode: "insensitive",

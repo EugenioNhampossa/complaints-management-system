@@ -14,10 +14,10 @@ import { IconArrowLeft } from "@tabler/icons-react";
 import Link from "next/link";
 import React from "react";
 
-export default function Register() {
+export default function Login() {
   return (
-    <div className="lg:grid grid-cols-2 w-[100vw] min-h-[100vh]">
-      <div className="p-4 hidden lg:block">
+    <div className="lg:grid grid-cols-2 w-[100vw]">
+      <div className="p-4">
         <BackgroundImage
           className="w-[100%] h-[100%]"
           radius="lg"
@@ -28,8 +28,8 @@ export default function Register() {
           <div className="w-[100%] h-[100%] bg-black/40 rounded-lg" />
         </BackgroundImage>
       </div>
-      <div className="relative min-h-[100vh] w-[100%]">
-        <div className="flex flex-col gap-6 items-center justify-center min-h-[100vh] py-8">
+      <div className="relative h-[100vh] w-[100%]">
+        <div className="flex flex-col gap-6 items-center justify-center h-full">
           <div className="absolute top-4 left-[10px] md:left-[70px]">
             <Link href="/">
               <Button variant="subtle" leftSection={<IconArrowLeft />}>
@@ -41,13 +41,13 @@ export default function Register() {
             <Image
               src="/logo-full.svg"
               alt="Logo"
-              className="h-[40px] w-fit object-contain mt-12 lg:mt-0"
+              className="h-[40px] w-fit object-contain m-md"
             />
           </Link>
           <Paper
             px="md"
             shadow="none"
-            className="bg-white w-[95%] md:w-[60%] lg:w-[80%]"
+            className="bg-white  w-[95%] md:w-[60%] lg:w-[80%]"
           >
             <Title ta="center" order={2}>
               Criar nova conta
@@ -55,12 +55,10 @@ export default function Register() {
             <Text ta="center" c="dimmed" size="sm" my="md">
               Preencha os dados abaixo para criar sua conta
             </Text>
-            
             <RegisterForm />
-
             <Text ta="center" mt="md" size="sm">
               Já tem uma conta?{" "}
-              <Anchor component={Link} href="/auth/login" weight={700}>
+              <Anchor component={Link} href="/auth/login">
                 Faça login
               </Anchor>
             </Text>

@@ -16,7 +16,7 @@ CREATE TABLE "User" (
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "type" "UserType" NOT NULL,
+    "type" "UserType" NOT NULL DEFAULT 'CITIZEN',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "deletedAt" TIMESTAMP(3),
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -28,6 +28,7 @@ CREATE TABLE "User" (
 CREATE TABLE "Citizen" (
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
+    "personalInfoId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "deletedAt" TIMESTAMP(3),
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -52,9 +53,8 @@ CREATE TABLE "personalInfo" (
     "id" TEXT NOT NULL,
     "firstName" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
-    "gender" "Gender" NOT NULL,
+    "phone" TEXT NOT NULL,
     "IdNumber" TEXT NOT NULL,
-    "birthDate" TIMESTAMP(3) NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "deletedAt" TIMESTAMP(3),
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -66,7 +66,7 @@ CREATE TABLE "personalInfo" (
 CREATE TABLE "Complaint" (
     "id" TEXT NOT NULL,
     "citizenId" TEXT NOT NULL,
-    "categoryId" INTEGER NOT NULL,
+    "categoryId" TEXT NOT NULL,
     "addressId" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT NOT NULL,
@@ -136,7 +136,7 @@ CREATE TABLE "Comment" (
 
 -- CreateTable
 CREATE TABLE "Category" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "isActive" BOOLEAN NOT NULL DEFAULT true,
@@ -154,6 +154,9 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 CREATE UNIQUE INDEX "Citizen_userId_key" ON "Citizen"("userId");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Citizen_personalInfoId_key" ON "Citizen"("personalInfoId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Employee_userId_key" ON "Employee"("userId");
 
 -- CreateIndex
@@ -168,8 +171,14 @@ CREATE UNIQUE INDEX "Complaint_addressId_key" ON "Complaint"("addressId");
 -- CreateIndex
 CREATE UNIQUE INDEX "ComplaintEmployee_complaintId_employeeId_key" ON "ComplaintEmployee"("complaintId", "employeeId");
 
+-- CreateIndex
+CREATE UNIQUE INDEX "Category_title_key" ON "Category"("title");
+
 -- AddForeignKey
 ALTER TABLE "Citizen" ADD CONSTRAINT "Citizen_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Citizen" ADD CONSTRAINT "Citizen_personalInfoId_fkey" FOREIGN KEY ("personalInfoId") REFERENCES "personalInfo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Employee" ADD CONSTRAINT "Employee_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;

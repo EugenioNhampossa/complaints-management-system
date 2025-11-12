@@ -57,11 +57,11 @@ export default function Login() {
               Insira as suas credencias para aceder à aplicação.
             </Text>
             <LoginForm />
-            
+
             <Text ta="center" mt="md" size="sm">
               Ainda não tem uma conta?{" "}
-              <Anchor component={Link} href="/auth/register" weight={700}>
-                Registre-se aqui
+              <Anchor component={Link} href="/auth/register">
+                Registre-se
               </Anchor>
             </Text>
           </Paper>
