@@ -6,8 +6,15 @@ import {
   Button,
   Stack,
   Checkbox,
+  Grid,
 } from "@mantine/core";
-import { IconAt, IconLock, IconUser, IconPhone } from "@tabler/icons-react";
+import { 
+  IconAt, 
+  IconLock, 
+  IconUser, 
+  IconPhone,
+  IconId 
+} from "@tabler/icons-react";
 import { useForm } from "@mantine/form";
 import { useRouter } from "next/navigation";
 
@@ -19,6 +26,7 @@ export function RegisterForm() {
       name: "",
       email: "",
       phone: "",
+      bi: "",
       password: "",
       confirmPassword: "",
       terms: false,
@@ -30,6 +38,8 @@ export function RegisterForm() {
         !/^\S+@\S+$/.test(value) ? "Email inválido" : null,
       phone: (value) =>
         value.length < 9 ? "Número de telefone inválido" : null,
+      bi: (value) =>
+        value.length < 13 ? "Número de BI inválido" : null,
       password: (value) =>
         value.length < 6 ? "A senha deve ter pelo menos 6 caracteres" : null,
       confirmPassword: (value, values) =>
@@ -41,7 +51,6 @@ export function RegisterForm() {
 
   const handleSubmit = (values: typeof form.values) => {
     console.log("Registro:", values);
-
   };
 
   return (
@@ -55,20 +64,34 @@ export function RegisterForm() {
           {...form.getInputProps("name")}
         />
 
-        <TextInput
-          label="Email"
-          placeholder="seu.email@exemplo.com"
-          leftSection={<IconAt size={16} />}
-          required
-          {...form.getInputProps("email")}
-        />
+        <Grid gutter="md">
+          <Grid.Col span={{ base: 12, sm: 6 }}>
+            <TextInput
+              label="Email"
+              placeholder="seu.email@exemplo.com"
+              leftSection={<IconAt size={16} />}
+              required
+              {...form.getInputProps("email")}
+            />
+          </Grid.Col>
+          
+          <Grid.Col span={{ base: 12, sm: 6 }}>
+            <TextInput
+              label="Telefone"
+              placeholder="84 123 4567"
+              leftSection={<IconPhone size={16} />}
+              required
+              {...form.getInputProps("phone")}
+            />
+          </Grid.Col>
+        </Grid>
 
         <TextInput
-          label="Telefone"
-          placeholder="84 123 4567"
-          leftSection={<IconPhone size={16} />}
+          label="Número do BI"
+          placeholder="110100123456A"
+          leftSection={<IconId size={16} />}
           required
-          {...form.getInputProps("phone")}
+          {...form.getInputProps("bi")}
         />
 
         <PasswordInput
