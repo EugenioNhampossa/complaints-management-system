@@ -98,7 +98,7 @@ export default function HelpPage() {
                   <IconUserPlus size={20} />
                 </ThemeIcon>
                 <div>
-                  <Text weight={500} className="text-stone-800 dark:text-white">
+                  <Text className="text-stone-800 dark:text-white">
                     Como Registar-se
                   </Text>
                   <Text size="sm" className="text-stone-600 dark:text-stone-400">
@@ -117,7 +117,7 @@ export default function HelpPage() {
                   <IconFileText size={20} />
                 </ThemeIcon>
                 <div>
-                  <Text weight={500} className="text-stone-800 dark:text-white">
+                  <Text className="text-stone-800 dark:text-white">
                     Fazer Denúncia
                   </Text>
                   <Text size="sm" className="text-stone-600 dark:text-stone-400">
@@ -136,7 +136,7 @@ export default function HelpPage() {
                   <IconMessage size={20} />
                 </ThemeIcon>
                 <div>
-                  <Text weight={500} className="text-stone-800 dark:text-white">
+                  <Text className="text-stone-800 dark:text-white">
                     Adicionar Comentários
                   </Text>
                   <Text size="sm" className="text-stone-600 dark:text-stone-400">

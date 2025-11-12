@@ -35,9 +35,9 @@ const useDeleteCitizen = () => {
       if (data.success) {
         notify({
           type: notificationType.info,
-          message: "Dados do cidadão apagados",
+          message: "Dados apagados",
         });
-        queryClient.invalidateQueries({ queryKey: ["citizens"] });
+        queryClient.invalidateQueries({ queryKey: ["users"] });
       } else {
         notify({
           message: data.error,
@@ -56,9 +56,9 @@ const useCreateCitizen = () => {
       if (data.success) {
         notify({
           type: notificationType.info,
-          message: "Cidaão registrado",
+          message: "Dados registrados",
         });
-        queryClient.invalidateQueries({ queryKey: ["citizens"] });
+        queryClient.invalidateQueries({ queryKey: ["users"] });
       } else {
         notify({ message: data.error, type: notificationType.error });
       }
@@ -74,9 +74,9 @@ const useUpdateCitizen = () => {
       if (data.success) {
         notify({
           type: notificationType.info,
-          message: "Dados do cidadão actualizados",
+          message: "Dados actualizados",
         });
-        queryClient.invalidateQueries({ queryKey: ["citizens"] });
+        queryClient.invalidateQueries({ queryKey: ["users"] });
       } else {
         const message = data.error;
         notify({ message, type: notificationType.error });

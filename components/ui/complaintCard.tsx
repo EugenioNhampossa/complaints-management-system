@@ -31,7 +31,7 @@ export function ComplaintCard({ href = "#", onClick }: ComplaintCardProps) {
           <Group gap="xs">
             <Avatar />
             <div>
-              <Text className="text-sm">Eugénio Nhampossa</Text>
+              <Text className="text-sm">Moisés Lopes</Text>
               <Text className="text-xs text-stone-500">11/04/2020</Text>
             </div>
           </Group>

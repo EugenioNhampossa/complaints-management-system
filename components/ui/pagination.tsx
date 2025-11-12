@@ -29,7 +29,7 @@ const CustomPagination = React.forwardRef<
       <div ref={ref} {...props}>
         <Group justify={!lessOptions ? "space-between" : "right"}>
           {!lessOptions && (
-            <span className="text-sm text-nowrap">{`${data.queryParams.page + 1} - ${data.queryParams.size} / ${totalElements}`}</span>
+            <span className="text-sm text-nowrap">{`${data.queryParams.page + 1} - ${data.queryParams.limit} / ${totalElements}`}</span>
           )}
           <Group>
             {!lessOptions && (
@@ -42,7 +42,7 @@ const CustomPagination = React.forwardRef<
                   onChange={(value) =>
                     data.handleRecordsPerPageChange(parseInt(value || "1"))
                   }
-                  value={`${data.queryParams.size}`}
+                  value={`${data.queryParams.limit}`}
                   data={["1", "20", "50", "100"]}
                 />
               </Group>

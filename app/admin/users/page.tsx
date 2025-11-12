@@ -20,8 +20,6 @@ import { openModal } from "@mantine/modals";
 import { DataTable } from "mantine-datatable";
 import React, { useEffect, useMemo } from "react";
 import { useQueryState, parseAsString, parseAsStringEnum } from "nuqs";
-import { UserType } from "@/prisma/generated/prisma";
-import { UserTypeString } from "@/utils/getUserTypeText";
 
 export default function Users() {
   const pagination = usePagination();
@@ -55,7 +53,10 @@ export default function Users() {
 
   useEffect(() => {
     refetch();
-  }, [name, email, type]);
+  }, [name, email, type, pagination.queryParams]);
+
+  console.log("render");
+  
 
   return (
     <div className="mb-[20px]">
@@ -144,15 +145,16 @@ export default function Users() {
             noRecordsIcon={
               <EmptyState message="Não existem utilizadores registrados" />
             }
-            recordsPerPageOptions={[20, 50, 100]}
+            onRowClick={(record) => console.log(record)}
+            recordsPerPageOptions={[2, 20, 50, 100]}
             recordsPerPageLabel="Por página"
-            page={pagination.queryParams.page + 1}
+            page={pagination.queryParams.page}
             totalRecords={users?.data.meta?.totalCount}
             recordsPerPage={pagination.queryParams.limit}
             onRecordsPerPageChange={(limit: number) =>
               pagination.handleRecordsPerPageChange(limit)
             }
-            onPageChange={(page: number) => pagination.setPage(page - 1)}
+            onPageChange={(page: number) => pagination.setPage(page)}
           />
         </Box>
       </div>

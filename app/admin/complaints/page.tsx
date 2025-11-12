@@ -82,13 +82,13 @@ export default function Complaints() {
             }
             recordsPerPageOptions={[20, 50, 100]}
             recordsPerPageLabel="Por página"
-            page={pagination.queryParams.page + 1}
+            page={pagination.queryParams.page}
             totalRecords={0}
             recordsPerPage={pagination.queryParams.limit}
             onRecordsPerPageChange={(size: number) =>
               pagination.handleRecordsPerPageChange(size)
             }
-            onPageChange={(page: number) => pagination.setPage(page - 1)}
+            onPageChange={(page: number) => pagination.setPage(page)}
           />
         </Box>
       </div>

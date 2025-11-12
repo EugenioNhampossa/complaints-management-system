@@ -55,7 +55,7 @@ export default function Categories() {
 
   useEffect(() => {
     refetch();
-  }, [title]);
+  }, [title, pagination.queryParams]);
 
   const ListContent = () => {
     if (isLoading || isFetching) {

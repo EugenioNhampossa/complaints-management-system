@@ -280,7 +280,7 @@ export default function AboutPage() {
                 <IconMail size={20} />
               </ThemeIcon>
               <div>
-                <Text size="sm" weight={500} className="text-stone-800 dark:text-white">
+                <Text size="sm" className="text-stone-800 dark:text-white">
                   Email
                 </Text>
                 <Text size="sm" className="text-stone-600 dark:text-stone-400">
@@ -294,7 +294,7 @@ export default function AboutPage() {
                 <IconPhone size={20} />
               </ThemeIcon>
               <div>
-                <Text size="sm" weight={500} className="text-stone-800 dark:text-white">
+                <Text size="sm" className="text-stone-800 dark:text-white">
                   Telefone
                 </Text>
                 <Text size="sm" className="text-stone-600 dark:text-stone-400">
@@ -308,7 +308,7 @@ export default function AboutPage() {
                 <IconMapPin size={20} />
               </ThemeIcon>
               <div>
-                <Text size="sm" weight={500} className="text-stone-800 dark:text-white">
+                <Text size="sm" className="text-stone-800 dark:text-white">
                   Localização
                 </Text>
                 <Text size="sm" className="text-stone-600 dark:text-stone-400">

@@ -19,11 +19,9 @@ import {
 import { useForm } from "@mantine/form";
 import { zod4Resolver } from "mantine-form-zod-resolver";
 import z from "zod";
-import { useRouter } from "next/navigation";
 import { createCitizenSchema } from "@/modules/citizen/citizen.schema";
 import { useCreateCitizen } from "@/modules/citizen/citizen.hooks";
-import { UserType } from "@/prisma/generated/prisma";
-import { getUserTypeText } from "@/utils/getUserTypeText";
+import { closeAllModals } from "@mantine/modals";
 
 export function RegisterForm({
   withUserType = false,
@@ -41,6 +39,7 @@ export function RegisterForm({
   const handleSubmit = (values: typeof form.values) => {
     mutate(values, {
       onSuccess() {
+        closeAllModals();
         form.reset();
       },
     });
