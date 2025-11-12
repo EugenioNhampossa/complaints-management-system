@@ -1,29 +1,27 @@
-import { useQueryState, parseAsString, parseAsInteger } from "nuqs";
+import { useQueryState, parseAsInteger } from "nuqs";
 import { useCallback, useMemo } from "react";
 
 export function usePagination() {
-  const [size, setSize] = useQueryState("size", parseAsInteger.withDefault(20));
-  const [page, setPage] = useQueryState("page", parseAsInteger.withDefault(0));
-  const [sort, setSort] = useQueryState(
-    "sort",
-    parseAsString.withDefault("createdAt,desc"),
+  const [limit, setLimit] = useQueryState(
+    "limit",
+    parseAsInteger.withDefault(20)
   );
+  const [page, setPage] = useQueryState("page", parseAsInteger.withDefault(1));
 
-  const queryParams = useMemo(() => ({ size, page, sort }), [size, page, sort]);
+  const queryParams = useMemo(() => ({ limit, page }), [limit, page]);
 
   const handleRecordsPerPageChange = useCallback(
-    (size: number) => {
-      setPage(0);
-      setSize(size);
+    (limit: number) => {
+      setPage(1);
+      setLimit(limit);
     },
-    [setPage, setSize],
+    [setPage, setLimit]
   );
 
   return {
     queryParams,
-    setSize: useCallback(setSize, []),
+    setLimit: useCallback(setLimit, []),
     setPage: useCallback(setPage, []),
-    setSort: useCallback(setSort, []),
     handleRecordsPerPageChange,
   };
 }

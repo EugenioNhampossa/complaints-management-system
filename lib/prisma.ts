@@ -15,6 +15,7 @@ export default prisma.$extends(
   pagination({
     pages: {
       limit: DEFAULT_PAGE_SIZE,
+      includePageCount: true,
     },
     cursor: {
       limit: DEFAULT_PAGE_SIZE,
