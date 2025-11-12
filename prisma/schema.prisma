@@ -85,7 +85,7 @@ model personalInfo {
 model Complaint {
   id          String              @id @default(nanoid())
   citizenId   String
-  categoryId  Int
+  categoryId  String
   addressId   String              @unique
   title       String
   description String
@@ -155,8 +155,8 @@ model Comment {
 }
 
 model Category {
-  id          Int         @id @default(autoincrement())
-  title       String
+  id          String      @id @default(nanoid())
+  title       String      @unique
   description String
   isActive    Boolean     @default(true)
   createdAt   DateTime    @default(now())
