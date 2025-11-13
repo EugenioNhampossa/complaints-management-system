@@ -29,15 +29,15 @@ export function Hero() {
                 260+
               </div>
               <span className="text-stone-500  block text-sm">
-                Expert Consultants
+                Reclamações Submetidas
               </span>
             </div>
             <div>
               <div className="font-manrope font-bold text-2xl text-stone-900">
-                975+
+                475+
               </div>
               <span className="text-stone-500  block text-sm">
-                Active Clients
+                Usuários Cadastrados
               </span>
             </div>
             <div>
@@ -45,7 +45,7 @@ export function Hero() {
                 724+
               </div>
               <span className="text-stone-500  block text-sm">
-                Projects Delivered
+                Situações Resolvidas
               </span>
             </div>
           </div>
