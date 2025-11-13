@@ -9,7 +9,9 @@ export function Hero() {
     <div className="container mx-auto px-4 mt-3">
       <SimpleGrid cols={{ md: 2, base: 1 }} spacing={50}>
         <div className="max-xs:text-center">
-          <Badge leftSection={<IconHeart size={12}/>} variant="outline">juntos fazemos a diferença</Badge>
+          <Badge leftSection={<IconHeart size={12} />} variant="outline">
+            juntos fazemos a diferença
+          </Badge>
           <h5 className="text-4xl md:text-6xl/[76px] font-semibold max-w-xl bg-gradient-to-r from-gray-700 to-primary-500 text-transparent bg-clip-text">
             Dê voz às suas preocupações
           </h5>
@@ -54,20 +56,20 @@ export function Hero() {
           <Grid.Col span={6}>
             <Image
               className="bg-cover h-full rounded-md"
-              src="https://www.wvi.org/sites/default/files/inline-images/WV_Mozambique_208.jpg"
+              src="/hero-img1.jpg"
             />
           </Grid.Col>
           <Grid.Col span={6}>
             <Image
               className="bg-cover h-full rounded-md"
-              src="https://images.unsplash.com/flagged/photo-1572213426852-0e4ed8f41ff6?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=874"
+              src="/hero-img2.avif"
             />
           </Grid.Col>
           <Grid.Col span={6}></Grid.Col>
           <Grid.Col span={6}>
             <Image
               className="bg-cover h-full rounded-md"
-              src="https://images.unsplash.com/photo-1591486085897-f433f05e7aed?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=870"
+              src="/hero-img3.avif"
             />
           </Grid.Col>
         </Grid>
