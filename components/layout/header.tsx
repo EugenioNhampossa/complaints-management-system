@@ -4,6 +4,8 @@ import { Button, Group, Image, Paper, rem } from "@mantine/core";
 import Link from "next/link";
 import { MobileMenu } from "./mobileMenu";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { PublicUserMenu } from "./publicUserMenu";
 
 export const NavLinks = [
   {
@@ -30,6 +32,7 @@ export const NavLinks = [
 
 export function Header() {
   const pathname = usePathname();
+  const { status, data } = useSession();
 
   function highlight(key: string) {
     if (pathname.includes(key)) {
@@ -61,13 +64,34 @@ export function Header() {
             </Link>
           ))}
         </Group>
-        <Group visibleFrom="lg">
-          <Button variant="outline" component={Link} href="/auth/register">Registre-se</Button>
-          <Button component={Link} href="/auth/login">
-            Entrar
-          </Button>
+        <Group>
+          {status === "unauthenticated" && (
+            <Group justify="end" visibleFrom="lg">
+              <Button variant="outline" component={Link} href="/auth/register">
+                Registre-se
+              </Button>
+              <Button component={Link} href="/auth/login">
+                Entrar
+              </Button>
+            </Group>
+          )}
+          {status === "authenticated" && data?.user && (
+            <Group justify="end" visibleFrom="lg">
+              {data.user.type === "ADMIN" && (
+                <Button
+                  variant="subtle"
+                  component={Link}
+                  href="/admin"
+                  size="md"
+                >
+                  Dashboard
+                </Button>
+              )}
+              {status === "authenticated" && <PublicUserMenu />}
+            </Group>
+          )}
+          <MobileMenu />
         </Group>
-        <MobileMenu />
       </nav>
     </Paper>
   );

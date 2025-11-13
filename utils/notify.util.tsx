@@ -1,5 +1,6 @@
 import { Title } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
+import { IconCircleCheck, IconCircleX } from "@tabler/icons-react";
 import React, { ReactNode } from "react";
 
 export enum notificationType {
@@ -11,8 +12,10 @@ export enum notificationType {
 export const notify = ({
   type,
   message,
+  title,
 }: {
   type?: notificationType;
+  title?: string;
   message: ReactNode;
 }) => {
   switch (type) {
@@ -20,17 +23,16 @@ export const notify = ({
       showNotification({
         color: "red",
         autoClose: false,
-        title: (
-          <Title c="red" order={6}>
-            Erro!
-          </Title>
-        ),
+        title: title || "Erro!",
         message,
+        icon: <IconCircleX />,
       });
       break;
     case notificationType.info:
       showNotification({
+        title: title,
         message,
+        icon: <IconCircleCheck />,
       });
       break;
     case notificationType.warning:
