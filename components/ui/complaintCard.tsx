@@ -1,3 +1,8 @@
+import { ComplaintResponse } from "@/modules/complaints/complaints.columns";
+import {
+  getComplaintStatusColor,
+  getComplaintStatusText,
+} from "@/utils/getComplaintStatusText";
 import {
   Avatar,
   Badge,
@@ -8,15 +13,20 @@ import {
   UnstyledButton,
 } from "@mantine/core";
 import { IconMapPin } from "@tabler/icons-react";
+import dayjs from "dayjs";
 import Link from "next/link";
 
 export type ComplaintCardProps = {
   href?: string;
   onClick?: () => void;
-  
+  complaint: ComplaintResponse;
 };
 
-export function ComplaintCard({ href = "#", onClick }: ComplaintCardProps) {
+export function ComplaintCard({
+  complaint,
+  href = "#",
+  onClick,
+}: ComplaintCardProps) {
   return (
     <UnstyledButton
       onClick={onClick}
@@ -32,26 +42,26 @@ export function ComplaintCard({ href = "#", onClick }: ComplaintCardProps) {
           <Group gap="xs">
             <Avatar />
             <div>
-              <Text className="text-sm">Moisés Lopes</Text>
-              <Text className="text-xs text-stone-500">11/04/2020</Text>
+              <Text className="text-sm">{`${complaint.citizen.personalInfo.firstName} ${complaint.citizen.personalInfo.lastName}`}</Text>
+              <Text className="text-xs text-stone-500">
+                {dayjs(complaint.createdAt).format("DD/MM/YYYY")}
+              </Text>
             </div>
           </Group>
-          <Text className="font-semibold text-sm">
-            Lixo a transbordar do contentor
-          </Text>
-          <Text c="dimmed" className="text-sm line-clamp-3">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora
-            porro facere temporibus eligendi perferendis! Magnam vel corporis
-            deserunt, optio adipisci nostrum impedit similique illo sapiente
-            eligendi esse earum porro non.
+          <Text className="font-semibold text-sm">{complaint.title}</Text>
+          <Text c="dimmed" className="text-sm line-clamp-3 h-[60px]">
+            {complaint.description}
           </Text>
           <Group justify="space-between" align="center">
             <Group gap="2px">
               <IconMapPin size={16} />
-              <Text className="text-xs ">Maputo, Moçambique</Text>
+              <Text className="text-xs ">{`${complaint.address.province}, ${complaint.address.district}`}</Text>
             </Group>
-            <Badge size="sm" color="red" variant="light" className="text-xs">
-              Pendente
+            <Badge
+              size="sm"
+              className={getComplaintStatusColor(complaint.status)}
+            >
+              {getComplaintStatusText(complaint.status)}
             </Badge>
           </Group>
         </Stack>

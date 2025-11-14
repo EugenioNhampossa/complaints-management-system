@@ -55,8 +55,6 @@ export default function Users() {
     refetch();
   }, [name, email, type, pagination.queryParams]);
 
-  console.log("render");
-  
 
   return (
     <div className="mb-[20px]">

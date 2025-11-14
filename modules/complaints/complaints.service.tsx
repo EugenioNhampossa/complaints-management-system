@@ -74,6 +74,7 @@ export async function findManyComplaints(
           address: true,
           category: true,
           createdAt: true,
+          description: true,
           citizen: {
             include: {
               personalInfo: {
@@ -86,6 +87,7 @@ export async function findManyComplaints(
             },
           },
         },
+        orderBy:{createdAt: 'desc'}
       })
       .withPages({ limit: filter?.limit, page: filter?.page });
 

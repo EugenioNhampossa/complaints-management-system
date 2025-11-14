@@ -8,15 +8,41 @@ import {
   Stack,
   Title,
   Text,
-  Image,
   Button,
+  Skeleton,
 } from "@mantine/core";
 import { ComplaintCard } from "@/components/ui/complaintCard";
 import { range } from "@mantine/hooks";
 import { Footer } from "@/components/layout/footer";
 import Link from "next/link";
+import { useFindManyComplaints } from "@/modules/complaints/complaints.hooks";
 
 export default function HomePage() {
+  const { data: complaints, isLoading } = useFindManyComplaints({ limit: 8 });
+
+  const ComplaintsList = () => {
+    if (isLoading) {
+      return (
+        <SimpleGrid cols={{ lg: 4, md: 3, sm: 2, base: 1 }} spacing={20}>
+          {range(1, 8).map((index) => (
+            <Skeleton key={index} className="w-full h-[190px] rounded-md" />
+          ))}
+        </SimpleGrid>
+      );
+    }
+    return (
+      <SimpleGrid cols={{ lg: 4, md: 3, sm: 2, base: 1 }} spacing={20}>
+        {complaints?.data.result.map((complaint) => (
+          <ComplaintCard
+            href={`/complaints/${complaint.id}`}
+            key={complaint.id}
+            complaint={complaint}
+          />
+        ))}
+      </SimpleGrid>
+    );
+  };
+
   return (
     <Stack gap={rem("50px")}>
       <Hero />
@@ -30,11 +56,7 @@ export default function HomePage() {
             reprehenderit corrupti tenetur illo maxime.
           </Text>
         </Box>
-        <SimpleGrid cols={{ lg: 4, md: 3, sm: 2, base: 1 }} spacing={20}>
-          {range(1, 8).map((index) => (
-            <ComplaintCard href={`/complaints/${index}`} key={index} />
-          ))}
-        </SimpleGrid>
+        <ComplaintsList />
         <div className="flex justify-center mt-8">
           <Button component={Link} href="/complaints" size="md">
             Ver mais reclamações

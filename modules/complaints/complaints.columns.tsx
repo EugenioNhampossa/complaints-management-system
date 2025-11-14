@@ -3,7 +3,6 @@ import { DataTableColumn } from "mantine-datatable";
 import {
   IconFileDescription,
   IconMapPin,
-  IconMapPin2,
 } from "@tabler/icons-react";
 import Link from "next/link";
 import { memo } from "react";
@@ -12,13 +11,14 @@ import { ComplaintPriority, ComplaintStatus } from "@/prisma/generated/prisma";
 import {
   getComplaintStatusColor,
   getComplaintStatusText,
-} from "@/utils/getUserTypeText";
+} from "@/utils/getComplaintStatusText";
 
-type ComplaintResponse = {
+export type ComplaintResponse = {
   status: ComplaintStatus;
   priority: ComplaintPriority | null;
   id: string;
   title: string;
+  description: string;
   citizen: {
     personalInfo: {
       id: string;

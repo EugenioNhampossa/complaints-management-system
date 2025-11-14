@@ -10,7 +10,7 @@ import { getTableProps } from "@/utils/getTableProps";
 import { Box, Paper, SimpleGrid, Select, TextInput } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
 import { DataTable } from "mantine-datatable";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Complaints() {
@@ -24,9 +24,17 @@ export default function Complaints() {
     [pagination.queryParams]
   );
 
-  const { data: complaints, isLoading } = useFindManyComplaints({
+  const {
+    data: complaints,
+    isLoading,
+    refetch,
+  } = useFindManyComplaints({
     ...queryParams,
   });
+
+  useEffect(() => {
+    refetch();
+  }, [pagination.queryParams]);
 
   return (
     <div className="mb-[20px]">
