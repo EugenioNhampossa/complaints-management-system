@@ -66,6 +66,26 @@ export async function findManyComplaints(
           citizenId: filter?.citizenId,
           priority: filter?.priority,
         },
+        select: {
+          id: true,
+          title: true,
+          status: true,
+          priority: true,
+          address: true,
+          category: true,
+          createdAt: true,
+          citizen: {
+            include: {
+              personalInfo: {
+                select: {
+                  id: true,
+                  firstName: true,
+                  lastName: true,
+                },
+              },
+            },
+          },
+        },
       })
       .withPages({ limit: filter?.limit, page: filter?.page });
 

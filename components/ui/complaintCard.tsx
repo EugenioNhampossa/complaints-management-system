@@ -13,6 +13,7 @@ import Link from "next/link";
 export type ComplaintCardProps = {
   href?: string;
   onClick?: () => void;
+  
 };
 
 export function ComplaintCard({ href = "#", onClick }: ComplaintCardProps) {
