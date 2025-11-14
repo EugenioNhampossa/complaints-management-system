@@ -1,18 +1,20 @@
 import {
   ActionIcon,
-  Button,
+  Group,
   Menu,
   MenuDivider,
   MenuDropdown,
   MenuItem,
   MenuTarget,
-  Stack,
+  Text,
 } from "@mantine/core";
 import Link from "next/link";
 import { NavLinks } from "./header";
-import { IconMenu2 } from "@tabler/icons-react";
+import { IconExclamationCircle, IconMenu2 } from "@tabler/icons-react";
 import { useSession } from "next-auth/react";
 import { AvatarButton } from "./avatarButton";
+import { modals } from "@mantine/modals";
+import { signOut } from "next-auth/react";
 
 export function MobileMenu() {
   const { status, data } = useSession();
@@ -46,13 +48,48 @@ export function MobileMenu() {
             <MenuItem color="primary" component={Link} href="/admin">
               Dashboard
             </MenuItem>
-            <MenuDivider />
+            <MenuItem
+              color="red"
+              onClick={() =>
+                modals.openConfirmModal({
+                  title: (
+                    <Group gap={5}>
+                      <IconExclamationCircle size={16} />
+                      <Text className="font-semibold">Confirme</Text>
+                    </Group>
+                  ),
+                  children: <Text>Deseja terminar a sessão?</Text>,
+                  onConfirm: () => signOut(),
+                  confirmProps: {
+                    children: "Sim",
+                    size: "xs",
+                  },
+                  cancelProps: {
+                    children: "Fechar",
+                    size: "xs",
+                  },
+                })
+              }
+            >
+              Saír
+            </MenuItem>
           </>
         )}
         {status === "unauthenticated" && (
           <>
-            <MenuItem variant="outline">Registre-se</MenuItem>
-            <MenuItem color="primary" variant="filled">
+            <MenuItem
+              href={"/auth/register"}
+              component={Link}
+              variant="outline"
+            >
+              Registre-se
+            </MenuItem>
+            <MenuItem
+              href={"/auth/login"}
+              component={Link}
+              color="primary"
+              variant="filled"
+            >
               Entrar
             </MenuItem>
           </>

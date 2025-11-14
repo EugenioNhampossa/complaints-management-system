@@ -85,10 +85,10 @@ const useUpdateCategory = () => {
   });
 };
 
-const useSelectCategories = () => {
+const useSelectCategories = (filter?: z.infer<typeof filterCategorySchema>) => {
   return useQuery({
     queryKey: ["categories"],
-    queryFn: () => findManyCategories(),
+    queryFn: () => findManyCategories(filter),
     select: (response) => {
       return response.data.result.map((value) => {
         return { value: value.id, label: value.title };

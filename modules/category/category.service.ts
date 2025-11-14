@@ -46,7 +46,7 @@ export async function findManyCategories(
           isActive: filter?.isActive,
         },
       })
-      .withPages({ limit: filter?.limit, page: filter?.page });
+      .withPages({ limit: filter?.limit || 20, page: filter?.page });
 
     return { success: true, data: { result, meta } };
   } catch (error) {

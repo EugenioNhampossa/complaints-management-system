@@ -9,6 +9,7 @@ import React from "react";
 import { UserButton } from "./userButton";
 import { modals } from "@mantine/modals";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 
 export type UserMenuProps = MenuProps;
 
@@ -44,7 +45,7 @@ const UserMenu = React.forwardRef<HTMLDivElement, UserMenuProps>(
                     </Group>
                   ),
                   children: <Text>Deseja terminar a sessão?</Text>,
-                  onConfirm: () => {},
+                  onConfirm: () => signOut(),
                   confirmProps: {
                     children: "Sim",
                     size: "xs",

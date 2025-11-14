@@ -62,6 +62,38 @@ export async function createCitizen(dto: z.infer<typeof createCitizenSchema>) {
   }
 }
 
+export async function findCitizenByUserId(userId: string) {
+  try {
+    if (!userId || typeof userId !== "string") {
+      return { success: false, error: "ID de utilizador inválido" };
+    }
+
+    const citizen = await prisma.citizen.findUnique({
+      where: {
+        deletedAt: null,
+        userId,
+      },
+    });
+
+    if (!citizen) {
+      return { success: false, error: "Dados do cidadão não encontrados" };
+    }
+
+    return { success: true, data: citizen };
+  } catch (error) {
+    console.error("Error finding citizen by user ID:", error);
+
+    if (
+      error instanceof PrismaClientKnownRequestError &&
+      error.code === "P2023"
+    ) {
+      return { success: false, error: "Formato de ID inválido" };
+    }
+
+    return { success: false, error: "Falha ao buscar os dados do cidadão" };
+  }
+}
+
 export async function findManyCitizens(
   filter?: z.infer<typeof filterPersonalInfoSchema>
 ) {

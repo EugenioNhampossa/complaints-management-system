@@ -5,6 +5,7 @@ import {
   findCitizenById,
   updateCitizen,
   findManyCitizens,
+  findCitizenByUserId,
 } from "./citizen.service";
 import z from "zod";
 import { notificationType, notify } from "@/utils/notify.util";
@@ -26,6 +27,14 @@ const useFindManyCitizens = (
     queryFn: () => findManyCitizens(filter),
   });
 };
+
+const useGetCitizenByUserId = (userId: string) => {
+  return useQuery({
+    queryKey: ["citizen-by-user", userId],
+    queryFn: () => findCitizenByUserId(userId),
+    enabled: !!userId,
+  });
+}
 
 const useDeleteCitizen = () => {
   const queryClient = useQueryClient();
@@ -107,4 +116,5 @@ export {
   useSelectCitizens,
   useUpdateCitizen,
   useDeleteCitizen,
+  useGetCitizenByUserId,
 };
