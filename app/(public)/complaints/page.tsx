@@ -3,6 +3,7 @@
 import { Footer } from "@/components/layout/footer";
 import { ComplaintCard } from "@/components/ui/complaintCard";
 import { usePagination } from "@/hooks/usePagination";
+import { useSelectCategories } from "@/modules/category/category.hooks";
 import { useFindManyComplaints } from "@/modules/complaints/complaints.hooks";
 import {
   Paper,
@@ -18,31 +19,61 @@ import {
   Divider,
   Pagination,
   Skeleton,
+  Loader,
 } from "@mantine/core";
 import { range } from "@mantine/hooks";
 import { IconSearch } from "@tabler/icons-react";
 import Link from "next/link";
+import { useQueryState, parseAsString, parseAsStringEnum } from "nuqs";
 import { useEffect, useMemo } from "react";
 
 export default function ComplaintsPage() {
   const pagination = usePagination();
+  const [title, setTitle] = useQueryState(
+    "title",
+    parseAsString.withDefault("")
+  );
+  const [status, setStatus] = useQueryState(
+    "status",
+    parseAsStringEnum([
+      "PENDING",
+      "IN_PROGRESS",
+      "COMPLETED",
+      "CANCELLED",
+      "ALL",
+    ])
+  );
+  const [category, setCategory] = useQueryState(
+    "category",
+    parseAsString.withDefault("")
+  );
+
+  const { data: categories, isLoading: isLoadingCategories } =
+    useSelectCategories({
+      isActive: true,
+    });
 
   const queryParams = useMemo(
     () => ({
       ...pagination.queryParams,
     }),
-    [pagination.queryParams]
+    [pagination.queryParams, category, title, status]
   );
 
   const {
     data: complaints,
     isLoading,
     refetch,
-  } = useFindManyComplaints({ ...queryParams });
+  } = useFindManyComplaints({
+    ...queryParams,
+    title: title || undefined,
+    categoryId: category || undefined,
+    status: status && status !== "ALL" ? status : undefined,
+  });
 
   useEffect(() => {
     refetch();
-  }, [pagination.queryParams]);
+  }, [pagination.queryParams, category, title, status]);
 
   const ComplaintsList = () => {
     if (isLoading) {
@@ -96,10 +127,32 @@ export default function ComplaintsPage() {
                 leftSection={<IconSearch size={18} />}
                 className="w-full"
                 variant="filled"
+                value={title}
+                onChange={(event) => setTitle(event.currentTarget.value)}
               />
               <Group grow>
-                <Select placeholder="Seleccione o estado" variant="filled" />
-                <Select placeholder="Seleccione a categoria" variant="filled" />
+                <Select
+                  placeholder="Seleccione o estado"
+                  variant="filled"
+                  data={[
+                    { value: "ALL", label: "Todos" },
+                    { value: "PENDING", label: "Pendente" },
+                    { value: "IN_PROGRESS", label: "Em progresso" },
+                    { value: "COMPLETED", label: "Concluído" },
+                    { value: "CANCELLED", label: "Cancelado" },
+                  ]}
+                  value={status}
+                  onChange={(value: any) => setStatus(value || "ALL")}
+                />
+                <Select
+                  placeholder="Seleccione a categoria"
+                  variant="filled"
+                  data={categories}
+                  disabled={isLoadingCategories}
+                  rightSection={isLoadingCategories && <Loader size={18} />}
+                  value={category}
+                  onChange={(value) => setCategory(value || "")}
+                />
               </Group>
             </SimpleGrid>
             <ComplaintsList />
