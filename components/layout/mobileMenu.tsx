@@ -45,7 +45,12 @@ export function MobileMenu() {
         {data?.user && data.user.type === "ADMIN" && (
           <>
             <MenuDivider />
-            <MenuItem color="primary" component={Link} href="/admin">
+            <MenuItem
+              color="primary"
+              component={Link}
+              href="/admin"
+              target="_blank"
+            >
               Dashboard
             </MenuItem>
             <MenuItem

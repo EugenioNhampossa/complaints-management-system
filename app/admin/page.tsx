@@ -10,6 +10,7 @@ import {
   Grid,
   Box,
   Button,
+  Skeleton,
 } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
 import {
@@ -24,6 +25,7 @@ import { range } from "@mantine/hooks";
 import { ComplaintCard } from "@/components/ui/complaintCard";
 import { Breadcrumbs } from "@/components/layout/admin/breadcrumbs";
 import { TitleBar } from "@/components/layout/admin/titleBar";
+import { useFindManyComplaints } from "@/modules/complaints/complaints.hooks";
 
 const data = [
   { day: "Segunda", total: 2000 },
@@ -36,6 +38,33 @@ const data = [
 ];
 
 export default function Dashboard() {
+  const { data: complaints, isLoading } = useFindManyComplaints({
+    limit: 5,
+  });
+
+  const ComplaintsList = () => {
+    if (isLoading) {
+      return (
+        <Stack className="pr-[2px]">
+          {range(1, 8).map((index) => (
+            <Skeleton key={index} className="w-full h-[190px] rounded-md" />
+          ))}
+        </Stack>
+      );
+    }
+    return (
+      <Stack className="pr-[2px]">
+        {complaints?.data.result.map((complaint) => (
+          <ComplaintCard
+            href={`/complaints/${complaint.id}`}
+            key={complaint.id}
+            complaint={complaint}
+          />
+        ))}
+      </Stack>
+    );
+  };
+
   return (
     <div className="mb-[20px]">
       <Breadcrumbs
@@ -68,7 +97,9 @@ export default function Dashboard() {
             </Paper>
             <Paper className="border-paper p-xs">
               <Group mb="xs" justify="space-between">
-                <Text className="font-semibold text-sm">Problemas resolvidos</Text>
+                <Text className="font-semibold text-sm">
+                  Problemas resolvidos
+                </Text>
                 <IconFileDescription size={18} className="text-stone-500" />
               </Group>
               <NumberFormatter
@@ -109,7 +140,9 @@ export default function Dashboard() {
             <Grid.Col span={{ base: 12, md: 6, lg: 7 }}>
               <Paper className="border-paper p-xs">
                 <Box mb="sm">
-                  <Text className="font-bold text-2xl">Reclamações da semana</Text>
+                  <Text className="font-bold text-2xl">
+                    Reclamações da semana
+                  </Text>
                   <Text c="dimmed" size="sm">
                     Visualize o desempenho nos últimos 7 dias
                   </Text>
@@ -133,7 +166,9 @@ export default function Dashboard() {
               <Paper className="border-paper p-xs">
                 <Group mb="sm" justify="space-between gap-sm w-full">
                   <Box className="grow">
-                    <Text className="font-bold text-2xl">Submissões activas</Text>
+                    <Text className="font-bold text-2xl">
+                      Submissões activas
+                    </Text>
                     <Text c="dimmed" size="sm">
                       Acompanhe os pedidos em andamento
                     </Text>
@@ -144,9 +179,7 @@ export default function Dashboard() {
                 </Group>
                 <div className="scrollArea overflow-y-auto h-[350px]">
                   <Stack className="pr-[2px]">
-                    {range(1, 8).map((index) => (
-                      <ComplaintCard key={index} />
-                    ))}
+                    <ComplaintsList />
                   </Stack>
                 </div>
               </Paper>

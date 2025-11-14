@@ -83,6 +83,7 @@ export function Header() {
                   component={Link}
                   href="/admin"
                   size="md"
+                  target="_blank"
                 >
                   Dashboard
                 </Button>
