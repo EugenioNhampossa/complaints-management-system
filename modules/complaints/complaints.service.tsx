@@ -87,7 +87,7 @@ export async function findManyComplaints(
             },
           },
         },
-        orderBy:{createdAt: 'desc'}
+        orderBy: { createdAt: "desc" },
       })
       .withPages({ limit: filter?.limit, page: filter?.page });
 
@@ -112,6 +112,17 @@ export async function findComplaintById(id: string) {
       where: {
         deletedAt: null,
         id,
+      },
+      include: {
+        address: true,
+        category: true,
+        citizen: {
+          include: {
+            personalInfo: true,
+          },
+        },
+        comments: true,
+        ratings: true,
       },
     });
 

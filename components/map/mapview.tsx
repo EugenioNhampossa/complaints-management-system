@@ -73,6 +73,6 @@ export function MapView({ latitude, longitude, zoom = 12 }: MapViewProps) {
   }, [latitude, longitude]);
 
   return (
-    <div className="w-full h-full" id="map-container" ref={mapContainerRef} />
+    <div className="w-full h-full rounded-md" id="map-container" ref={mapContainerRef} />
   );
 }
