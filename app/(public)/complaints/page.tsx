@@ -2,6 +2,7 @@
 
 import { Footer } from "@/components/layout/footer";
 import { ComplaintCard } from "@/components/ui/complaintCard";
+import { EmptyState } from "@/components/ui/emptyState";
 import { usePagination } from "@/hooks/usePagination";
 import { useSelectCategories } from "@/modules/category/category.hooks";
 import { useFindManyComplaints } from "@/modules/complaints/complaints.hooks";
@@ -84,6 +85,9 @@ export default function ComplaintsPage() {
           ))}
         </SimpleGrid>
       );
+    }
+    if (!complaints || complaints.data.result.length === 0) {
+      return <EmptyState message="Sem reclamações registradas" />;
     }
     return (
       <SimpleGrid cols={{ lg: 4, md: 3, sm: 2, base: 1 }} spacing={20}>

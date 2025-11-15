@@ -87,7 +87,7 @@ const useUpdateCategory = () => {
 
 const useSelectCategories = (filter?: z.infer<typeof filterCategorySchema>) => {
   return useQuery({
-    queryKey: ["categories"],
+    queryKey: ["categories", filter],
     queryFn: () => findManyCategories(filter),
     select: (response) => {
       return response.data.result.map((value) => {

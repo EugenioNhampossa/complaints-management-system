@@ -16,6 +16,7 @@ import { range } from "@mantine/hooks";
 import { Footer } from "@/components/layout/footer";
 import Link from "next/link";
 import { useFindManyComplaints } from "@/modules/complaints/complaints.hooks";
+import { EmptyState } from "@/components/ui/emptyState";
 
 export default function HomePage() {
   const { data: complaints, isLoading } = useFindManyComplaints({ limit: 8 });
@@ -29,6 +30,9 @@ export default function HomePage() {
           ))}
         </SimpleGrid>
       );
+    }
+    if (!complaints || complaints.data.result.length === 0) {
+      return <EmptyState message="Sem reclamações registradas" />;
     }
     return (
       <SimpleGrid cols={{ lg: 4, md: 3, sm: 2, base: 1 }} spacing={20}>

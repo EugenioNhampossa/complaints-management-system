@@ -13,7 +13,7 @@ const useFindOneUser = (id: string) => {
 
 const useFindManyUsers = (filter?: z.infer<typeof filterUserSchema>) => {
   return useQuery({
-    queryKey: ["users"],
+    queryKey: ["users", filter],
     queryFn: () => findManyUsers(filter),
   });
 };

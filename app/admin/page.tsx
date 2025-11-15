@@ -56,7 +56,7 @@ export default function Dashboard() {
       <Stack className="pr-[2px]">
         {complaints?.data.result.map((complaint) => (
           <ComplaintCard
-            href={`/complaints/${complaint.id}`}
+            href={`/admin/complaints/${complaint.id}`}
             key={complaint.id}
             complaint={complaint}
           />

@@ -21,7 +21,7 @@ const useFindManyComplaints = (
   filter?: z.infer<typeof filterComplaintSchema>
 ) => {
   return useQuery({
-    queryKey: ["complaints"],
+    queryKey: ["complaints", filter],
     queryFn: () => findManyComplaints(filter),
   });
 };
